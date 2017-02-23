@@ -9,6 +9,36 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<div style="width:600px; margin-left:auto; margin-right:auto">
+    <div style="background-color: lightgray">
+        <h2>My Products</h2>
+    </div>
+    <p>Click the button to Get Products with an Ajax call</p>
+    <input id="btnAjax" name="btnAjax" type="button" value="Get Products" />
+    <div id="allPeople" style="background-color:lightskyblue"></div>
+</div>
+
+@section Scripts {
+    <script>
+    $('#btnAjax').click(function () {
+        $.ajax({
+                url: '/PersonInformation/GetAllPeople',
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html'
+
+            })
+            .success(function (result) {
+                alert("YAY");
+                $('#allPeople').html(result);
+            })
+            .error(function(xhr, status) {
+                alert("ERROR");
+                alert(status);
+            });
+    });
+    </script>
+}
 <table class="table">
     <tr>
         <th>

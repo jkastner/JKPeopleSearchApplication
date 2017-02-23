@@ -14,12 +14,12 @@ namespace JKPeopleSearchApplication.Controllers
 {
     public class PersonInformationController : Controller
     {
-        private PersonInfoContext db = new PersonInfoContext();
+        private PersonInfoContext _personInfoContext = new PersonInfoContext();
 
         // GET: PersonInformations
         public async Task<ActionResult> Index()
         {
-            return View(await db.AllPersonInfo.ToListAsync());
+            return View(await _personInfoContext.AllPersonInfo.ToListAsync());
         }
 
         // GET: PersonInformations/Details/5
@@ -29,7 +29,7 @@ namespace JKPeopleSearchApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonInformation personInformation = await db.AllPersonInfo.FindAsync(id);
+            PersonInformation personInformation = await _personInfoContext.AllPersonInfo.FindAsync(id);
             if (personInformation == null)
             {
                 return HttpNotFound();
@@ -52,8 +52,8 @@ namespace JKPeopleSearchApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AllPersonInfo.Add(personInformation);
-                await db.SaveChangesAsync();
+                _personInfoContext.AllPersonInfo.Add(personInformation);
+                await _personInfoContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +67,7 @@ namespace JKPeopleSearchApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonInformation personInformation = await db.AllPersonInfo.FindAsync(id);
+            PersonInformation personInformation = await _personInfoContext.AllPersonInfo.FindAsync(id);
             if (personInformation == null)
             {
                 return HttpNotFound();
@@ -84,8 +84,8 @@ namespace JKPeopleSearchApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(personInformation).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _personInfoContext.Entry(personInformation).State = EntityState.Modified;
+                await _personInfoContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(personInformation);
@@ -98,7 +98,7 @@ namespace JKPeopleSearchApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PersonInformation personInformation = await db.AllPersonInfo.FindAsync(id);
+            PersonInformation personInformation = await _personInfoContext.AllPersonInfo.FindAsync(id);
             if (personInformation == null)
             {
                 return HttpNotFound();
@@ -111,17 +111,23 @@ namespace JKPeopleSearchApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PersonInformation personInformation = await db.AllPersonInfo.FindAsync(id);
-            db.AllPersonInfo.Remove(personInformation);
-            await db.SaveChangesAsync();
+            PersonInformation personInformation = await _personInfoContext.AllPersonInfo.FindAsync(id);
+            _personInfoContext.AllPersonInfo.Remove(personInformation);
+            await _personInfoContext.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public PartialViewResult GetAllPeople()
+        {
+            var allPeople = _personInfoContext.AllPersonInfo.ToArray();
+            return PartialView(allPeople);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _personInfoContext.Dispose();
             }
             base.Dispose(disposing);
         }
