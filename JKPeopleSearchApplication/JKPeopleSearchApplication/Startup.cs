@@ -10,5 +10,6 @@ namespace JKPeopleSearchApplication
         {
             ConfigureAuth(app);
         }
+
     }
 }

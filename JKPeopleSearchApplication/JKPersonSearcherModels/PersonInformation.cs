@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ namespace JKPersonSearcherModels
     /// </summary>
     public class PersonInformation
     {
+        [Display(Name="First Name")]
         public String FirstName { get; set; }
+        [Display(Name = "Last Name")]
         public String LastName { get; set; }
 
         public int PersonInformationId { get; set; }

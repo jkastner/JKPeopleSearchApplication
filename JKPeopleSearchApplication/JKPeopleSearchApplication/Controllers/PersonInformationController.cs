@@ -119,8 +119,18 @@ namespace JKPeopleSearchApplication.Controllers
 
         public PartialViewResult GetAllPeople()
         {
-            var allPeople = _personInfoContext.AllPersonInfo.ToArray();
-            return PartialView(allPeople);
+            string data = Request.Params["jsonData"];
+            if (String.IsNullOrWhiteSpace(data))
+            {
+                return PartialView( _personInfoContext.AllPersonInfo.ToArray());
+            }
+            var trimmedData = data.Trim().ToLower();
+            var matchingPeople = _personInfoContext.AllPersonInfo.Where(
+                x=>
+                x.FirstName.ToLower().Contains(trimmedData) ||
+                x.LastName.ToLower().Contains(trimmedData)
+                ).ToArray();
+            return PartialView(matchingPeople);
         }
 
         protected override void Dispose(bool disposing)
@@ -130,6 +140,28 @@ namespace JKPeopleSearchApplication.Controllers
                 _personInfoContext.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public async Task<ActionResult> InsertSeedData()
+        {
+            var allCurrent = _personInfoContext.AllPersonInfo.ToArray();
+            foreach (var curData in allCurrent)
+            {
+                _personInfoContext.AllPersonInfo.Remove(curData);
+            }
+            await _personInfoContext.SaveChangesAsync();
+            var seedData = SeedData.SeedInformation();
+            foreach (var cur in seedData)
+            {
+                if (ModelState.IsValid)
+                {
+                    _personInfoContext.AllPersonInfo.Add(cur);
+                }
+            }
+            await _personInfoContext.SaveChangesAsync();
+
+
+            return RedirectToAction("Index");
         }
     }
 }

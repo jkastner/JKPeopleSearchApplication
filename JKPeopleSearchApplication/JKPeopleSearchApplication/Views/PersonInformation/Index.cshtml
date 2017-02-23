@@ -8,62 +8,59 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create Seed Data", "InsertSeedData")
 </p>
 <div style="width:600px; margin-left:auto; margin-right:auto">
     <div style="background-color: lightgray">
-        <h2>My Products</h2>
+        <h2>Person Search</h2>
     </div>
-    <p>Click the button to Get Products with an Ajax call</p>
-    <input id="btnAjax" name="btnAjax" type="button" value="Get Products" />
+    <p>Type any part of the first or last name to search</p>
+    <input id="searchText" name="searchTextInput" type="text" value="" />
     <div id="allPeople" style="background-color:lightskyblue"></div>
 </div>
 
 @section Scripts {
     <script>
-    $('#btnAjax').click(function () {
-        $.ajax({
-                url: '/PersonInformation/GetAllPeople',
-                contentType: 'application/html; charset=utf-8',
-                type: 'GET',
-                dataType: 'html'
+        window.onload = doneTyping();
 
-            })
-            .success(function (result) {
-                alert("YAY");
-                $('#allPeople').html(result);
-            })
-            .error(function(xhr, status) {
-                alert("ERROR");
-                alert(status);
-            });
-    });
+
+
+        //Taken from:
+        //http://stackoverflow.com/questions/4220126/run-javascript-function-when-user-finishes-typing-instead-of-on-key-up
+        var typingTimer;                //timer identifier
+        var doneTypingInterval = 250;  //time in ms
+
+        $('#searchText').keyup(function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        });
+
+        //user is "finished typing," do something
+        function doneTyping() {
+            var currentInput = $('#searchText').val();
+            runSearch(currentInput);
+
+
+        }
+
+        function runSearch(myInput) {
+                $.ajax({
+                    url: '/PersonInformation/GetAllPeople',
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    data: { "jsonData": myInput },
+                    dataType: 'html'
+
+                })
+                    .success(function (result) {
+                        $('#allPeople').html(result);
+                    })
+                    .error(function(xhr, status) {
+                        alert(status);
+                    });
+            }
+
+
+
     </script>
 }
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PersonInformationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PersonInformationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PersonInformationId })
-        </td>
-    </tr>
-}
-
-</table>
