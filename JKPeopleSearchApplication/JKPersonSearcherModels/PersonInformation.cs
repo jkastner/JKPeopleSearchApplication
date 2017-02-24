@@ -19,6 +19,9 @@ namespace JKPersonSearcherModels
         public String LastName { get; set; }
 
         public int PersonInformationId { get; set; }
-
+        public int Age { get; set; }
+        public string Address { get; set; }
+        public string Interests { get; set; }
+        public virtual PersonImage PersonInformationImage { get; set; }
     }
 }

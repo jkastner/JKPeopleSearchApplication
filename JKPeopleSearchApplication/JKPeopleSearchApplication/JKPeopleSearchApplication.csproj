@@ -267,12 +267,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\PersonInformation\PersonSearchMatch.cshtml" />
     <Content Include="Views\PersonInformation\Create.cshtml" />
     <Content Include="Views\PersonInformation\Delete.cshtml" />
     <Content Include="Views\PersonInformation\Details.cshtml" />
     <Content Include="Views\PersonInformation\Edit.cshtml" />
     <Content Include="Views\PersonInformation\Index.cshtml" />
-    <Content Include="Views\PersonInformation\GetAllPeople.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

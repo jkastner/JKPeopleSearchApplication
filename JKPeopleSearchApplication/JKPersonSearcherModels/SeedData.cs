@@ -1,174 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace JKPersonSearcherModels
 {
-    public static class SeedData
+    public class SeedData
     {
+        private SeedData()
+        {
+
+        }
+
+        public static IReadOnlyList<PersonInformation> GetSeedInformation()
+        {
+            SeedData sd = new SeedData();
+            return sd.SeedInformation();
+        }
+
         /// <summary>
         /// Generates a few hundred random names for testing purposes.
         /// I'll probably move this to a unit test class later.
         /// </summary>
         /// <returns></returns>
-        public static IReadOnlyList<PersonInformation> SeedInformation()
+        private IReadOnlyList<PersonInformation> SeedInformation()
         {
             List<PersonInformation> ret = new List<PersonInformation>();
-            ret.Add(new PersonInformation() { FirstName = "Flick", LastName = "Addison" });
-            ret.Add(new PersonInformation() { FirstName = "Louie", LastName = "Herberts" });
-            ret.Add(new PersonInformation() { FirstName = "Heather", LastName = "Tennyson" });
-            ret.Add(new PersonInformation() { FirstName = "Audrey", LastName = "Carver" });
-            ret.Add(new PersonInformation() { FirstName = "Woody", LastName = "Rowe" });
-            ret.Add(new PersonInformation() { FirstName = "Gertrude", LastName = "Whitaker" });
-            ret.Add(new PersonInformation() { FirstName = "Roly", LastName = "Merrick" });
-            ret.Add(new PersonInformation() { FirstName = "Lucius", LastName = "Paternoster" });
-            ret.Add(new PersonInformation() { FirstName = "Winona", LastName = "Palmer" });
-            ret.Add(new PersonInformation() { FirstName = "Bettye", LastName = "Jepson" });
-            ret.Add(new PersonInformation() { FirstName = "Desiree", LastName = "Carlisle" });
-            ret.Add(new PersonInformation() { FirstName = "Earnest", LastName = "Bloxam" });
-            ret.Add(new PersonInformation() { FirstName = "Rachel", LastName = "Simpkin" });
-            ret.Add(new PersonInformation() { FirstName = "Dominick", LastName = "Christison" });
-            ret.Add(new PersonInformation() { FirstName = "Elfrieda", LastName = "Goffe" });
-            ret.Add(new PersonInformation() { FirstName = "Dean", LastName = "Newman" });
-            ret.Add(new PersonInformation() { FirstName = "Charlene", LastName = "Thompson" });
-            ret.Add(new PersonInformation() { FirstName = "Gil", LastName = "Huxtable" });
-            ret.Add(new PersonInformation() { FirstName = "Angie", LastName = "Varnham" });
-            ret.Add(new PersonInformation() { FirstName = "Drea", LastName = "Olhouser" });
-            ret.Add(new PersonInformation() { FirstName = "Ern", LastName = "Coel" });
-            ret.Add(new PersonInformation() { FirstName = "Addy", LastName = "Timothyson" });
-            ret.Add(new PersonInformation() { FirstName = "Betsy", LastName = "Linwood" });
-            ret.Add(new PersonInformation() { FirstName = "Samuel", LastName = "Winston" });
-            ret.Add(new PersonInformation() { FirstName = "Antonia", LastName = "Henderson" });
-            ret.Add(new PersonInformation() { FirstName = "Joann", LastName = "Seaver" });
-            ret.Add(new PersonInformation() { FirstName = "Claudia", LastName = "Peters" });
-            ret.Add(new PersonInformation() { FirstName = "Rebecca", LastName = "Williams" });
-            ret.Add(new PersonInformation() { FirstName = "Oz", LastName = "Tollemache" });
-            ret.Add(new PersonInformation() { FirstName = "Lamar", LastName = "Carver" });
-            ret.Add(new PersonInformation() { FirstName = "India", LastName = "Nelson" });
-            ret.Add(new PersonInformation() { FirstName = "Lucinda", LastName = "Wheeler" });
-            ret.Add(new PersonInformation() { FirstName = "Benjamin", LastName = "Cocks" });
-            ret.Add(new PersonInformation() { FirstName = "Robyn", LastName = "Bennett" });
-            ret.Add(new PersonInformation() { FirstName = "Racquel", LastName = "Eldridge" });
-            ret.Add(new PersonInformation() { FirstName = "Sherwood", LastName = "Goode" });
-            ret.Add(new PersonInformation() { FirstName = "Wilma", LastName = "Reynolds" });
-            ret.Add(new PersonInformation() { FirstName = "Helena", LastName = "Holmwood" });
-            ret.Add(new PersonInformation() { FirstName = "Woody", LastName = "Hodges" });
-            ret.Add(new PersonInformation() { FirstName = "Andrea", LastName = "Jeffers" });
-            ret.Add(new PersonInformation() { FirstName = "Gil", LastName = "Pocock" });
-            ret.Add(new PersonInformation() { FirstName = "Lissa", LastName = "Marlow" });
-            ret.Add(new PersonInformation() { FirstName = "Lena", LastName = "Bonner" });
-            ret.Add(new PersonInformation() { FirstName = "Kyla", LastName = "Lewis" });
-            ret.Add(new PersonInformation() { FirstName = "Victor", LastName = "Christianson" });
-            ret.Add(new PersonInformation() { FirstName = "Israel", LastName = "Dawson" });
-            ret.Add(new PersonInformation() { FirstName = "Wardell", LastName = "Turner" });
-            ret.Add(new PersonInformation() { FirstName = "Syd", LastName = "Langley" });
-            ret.Add(new PersonInformation() { FirstName = "Annabelle", LastName = "Hathaway" });
-            ret.Add(new PersonInformation() { FirstName = "Effie", LastName = "Bellamy" });
-            ret.Add(new PersonInformation() { FirstName = "Wyatt", LastName = "Arnold" });
-            ret.Add(new PersonInformation() { FirstName = "Manny", LastName = "Fairchild" });
-            ret.Add(new PersonInformation() { FirstName = "Wendi", LastName = "Bunker" });
-            ret.Add(new PersonInformation() { FirstName = "Niles", LastName = "Pickle" });
-            ret.Add(new PersonInformation() { FirstName = "Rosanne", LastName = "King" });
-            ret.Add(new PersonInformation() { FirstName = "Nova", LastName = "Barlow" });
-            ret.Add(new PersonInformation() { FirstName = "Leann", LastName = "Simmons" });
-            ret.Add(new PersonInformation() { FirstName = "Nita", LastName = "Banks" });
-            ret.Add(new PersonInformation() { FirstName = "Lon", LastName = "Patton" });
-            ret.Add(new PersonInformation() { FirstName = "Isabelle", LastName = "Harrison" });
-            ret.Add(new PersonInformation() { FirstName = "Dorinda", LastName = "Samuels" });
-            ret.Add(new PersonInformation() { FirstName = "Marlene", LastName = "Peter" });
-            ret.Add(new PersonInformation() { FirstName = "Laura", LastName = "Hameldon" });
-            ret.Add(new PersonInformation() { FirstName = "Clint", LastName = "Cristians" });
-            ret.Add(new PersonInformation() { FirstName = "Marianna", LastName = "Christinson" });
-            ret.Add(new PersonInformation() { FirstName = "Jannette", LastName = "Atkins" });
-            ret.Add(new PersonInformation() { FirstName = "Georgene", LastName = "Kendrick" });
-            ret.Add(new PersonInformation() { FirstName = "Caitlin", LastName = "Slater" });
-            ret.Add(new PersonInformation() { FirstName = "Juliet", LastName = "Clifford" });
-            ret.Add(new PersonInformation() { FirstName = "Darien", LastName = "Akerman" });
-            ret.Add(new PersonInformation() { FirstName = "Fulton", LastName = "Stanton" });
-            ret.Add(new PersonInformation() { FirstName = "Reed", LastName = "Gardner" });
-            ret.Add(new PersonInformation() { FirstName = "Dom", LastName = "Ray" });
-            ret.Add(new PersonInformation() { FirstName = "Wade", LastName = "Ready" });
-            ret.Add(new PersonInformation() { FirstName = "Jeb", LastName = "Edwards" });
-            ret.Add(new PersonInformation() { FirstName = "Booker", LastName = "Newman" });
-            ret.Add(new PersonInformation() { FirstName = "Harlan", LastName = "Breckenridge" });
-            ret.Add(new PersonInformation() { FirstName = "Cory", LastName = "Oliverson" });
-            ret.Add(new PersonInformation() { FirstName = "Arnold", LastName = "Draper" });
-            ret.Add(new PersonInformation() { FirstName = "Wilkie", LastName = "Mason" });
-            ret.Add(new PersonInformation() { FirstName = "Melba", LastName = "Ray" });
-            ret.Add(new PersonInformation() { FirstName = "Elinor", LastName = "Sudworth" });
-            ret.Add(new PersonInformation() { FirstName = "Jenelle", LastName = "Hampton" });
-            ret.Add(new PersonInformation() { FirstName = "Ingram", LastName = "Bonher" });
-            ret.Add(new PersonInformation() { FirstName = "Corrie", LastName = "Michaels" });
-            ret.Add(new PersonInformation() { FirstName = "Rollo", LastName = "Merrick" });
-            ret.Add(new PersonInformation() { FirstName = "Wendell", LastName = "Ecclestone" });
-            ret.Add(new PersonInformation() { FirstName = "Bishop", LastName = "Stevenson" });
-            ret.Add(new PersonInformation() { FirstName = "Baxter", LastName = "Bray" });
-            ret.Add(new PersonInformation() { FirstName = "Jacqueline", LastName = "Rowbottom" });
-            ret.Add(new PersonInformation() { FirstName = "Sheila", LastName = "Jans" });
-            ret.Add(new PersonInformation() { FirstName = "Kizzie", LastName = "Christopherson" });
-            ret.Add(new PersonInformation() { FirstName = "Karlene", LastName = "Buckley" });
-            ret.Add(new PersonInformation() { FirstName = "Diann", LastName = "Sackville" });
-            ret.Add(new PersonInformation() { FirstName = "Allyson", LastName = "Wilson" });
-            ret.Add(new PersonInformation() { FirstName = "Evette", LastName = "Wray" });
-            ret.Add(new PersonInformation() { FirstName = "Bindy", LastName = "Davis" });
-            ret.Add(new PersonInformation() { FirstName = "Layton", LastName = "Adamson" });
-            ret.Add(new PersonInformation() { FirstName = "Caroline", LastName = "Howard" });
-            ret.Add(new PersonInformation() { FirstName = "Lyle", LastName = "Bush" });
-            ret.Add(new PersonInformation() { FirstName = "Deforest", LastName = "Hume" });
-            ret.Add(new PersonInformation() { FirstName = "Moses", LastName = "Herbertson" });
-            ret.Add(new PersonInformation() { FirstName = "Dre", LastName = "Sanders" });
-            ret.Add(new PersonInformation() { FirstName = "Edith", LastName = "David" });
-            ret.Add(new PersonInformation() { FirstName = "Candice", LastName = "Lowry" });
-            ret.Add(new PersonInformation() { FirstName = "Issac", LastName = "Arterbury" });
-            ret.Add(new PersonInformation() { FirstName = "Isaac", LastName = "Spearing" });
-            ret.Add(new PersonInformation() { FirstName = "Corrine", LastName = "Seymour" });
-            ret.Add(new PersonInformation() { FirstName = "Katherine", LastName = "Knaggs" });
-            ret.Add(new PersonInformation() { FirstName = "Aline", LastName = "Levitt" });
-            ret.Add(new PersonInformation() { FirstName = "Dallas", LastName = "Triggs" });
-            ret.Add(new PersonInformation() { FirstName = "Wardell", LastName = "Abrams" });
-            ret.Add(new PersonInformation() { FirstName = "Rosalyn", LastName = "Derricks" });
-            ret.Add(new PersonInformation() { FirstName = "Jeffery", LastName = "Appleton" });
-            ret.Add(new PersonInformation() { FirstName = "Suzie", LastName = "Evanson" });
-            ret.Add(new PersonInformation() { FirstName = "Gretta", LastName = "Georgeson" });
-            ret.Add(new PersonInformation() { FirstName = "Elly", LastName = "Leavitt" });
-            ret.Add(new PersonInformation() { FirstName = "Alicia", LastName = "Moses" });
-            ret.Add(new PersonInformation() { FirstName = "Pippa", LastName = "Allard" });
-            ret.Add(new PersonInformation() { FirstName = "Cooper", LastName = "Hodges" });
-            ret.Add(new PersonInformation() { FirstName = "Denzil", LastName = "Godfrey" });
-            ret.Add(new PersonInformation() { FirstName = "Sharyl", LastName = "Patrickson" });
-            ret.Add(new PersonInformation() { FirstName = "Liberty", LastName = "Hatheway" });
-            ret.Add(new PersonInformation() { FirstName = "Dustin", LastName = "Ryder" });
-            ret.Add(new PersonInformation() { FirstName = "Gregory", LastName = "Kendrick" });
-            ret.Add(new PersonInformation() { FirstName = "Jere", LastName = "Jones" });
-            ret.Add(new PersonInformation() { FirstName = "Mariah", LastName = "Becket" });
-            ret.Add(new PersonInformation() { FirstName = "Glenna", LastName = "Bolton" });
-            ret.Add(new PersonInformation() { FirstName = "Jonie", LastName = "Causer" });
-            ret.Add(new PersonInformation() { FirstName = "Staci", LastName = "Bray" });
-            ret.Add(new PersonInformation() { FirstName = "Sterling", LastName = "Jackson" });
-            ret.Add(new PersonInformation() { FirstName = "Thad", LastName = "Christisen" });
-            ret.Add(new PersonInformation() { FirstName = "Ross", LastName = "Appleby" });
-            ret.Add(new PersonInformation() { FirstName = "Tex", LastName = "Suggitt" });
-            ret.Add(new PersonInformation() { FirstName = "Sean", LastName = "Madison" });
-            ret.Add(new PersonInformation() { FirstName = "Ronny", LastName = "Potter" });
-            ret.Add(new PersonInformation() { FirstName = "Noelle", LastName = "Phillips" });
-            ret.Add(new PersonInformation() { FirstName = "Darryl", LastName = "Pearson" });
-            ret.Add(new PersonInformation() { FirstName = "Vi", LastName = "Cooke" });
-            ret.Add(new PersonInformation() { FirstName = "Essie", LastName = "Elliot" });
-            ret.Add(new PersonInformation() { FirstName = "Alana", LastName = "Sawyer" });
-            ret.Add(new PersonInformation() { FirstName = "Nellie", LastName = "Merrickson" });
-            ret.Add(new PersonInformation() { FirstName = "Aurora", LastName = "Patrick" });
-            ret.Add(new PersonInformation() { FirstName = "Bobbi", LastName = "Walmsley" });
-            ret.Add(new PersonInformation() { FirstName = "Evelina", LastName = "Spurling" });
-            ret.Add(new PersonInformation() { FirstName = "Em", LastName = "Alberts" });
-            ret.Add(new PersonInformation() { FirstName = "Ellis", LastName = "Ruskin" });
-            ret.Add(new PersonInformation() { FirstName = "Eleanore", LastName = "Bishop" });
-            ret.Add(new PersonInformation() { FirstName = "Lizzy", LastName = "Jepson" });
-            ret.Add(new PersonInformation() { FirstName = "Milton", LastName = "Weaver" });
-            ret.Add(new PersonInformation() { FirstName = "Mack", LastName = "Ruskin" });
+            var currentAssembly = this.GetType().Assembly;
+
+            using (var stream = currentAssembly.GetManifestResourceStream("JKPersonSearcherModels.SampleData.txt"))
+            using (var reader = new StreamReader(stream))
+            {
+                List<String> allLines = new List<string>();
+                String line = "";
+                while ((line = reader.ReadLine()) != null)
+                {
+                    allLines.Add(line);
+                }
+                //Skip the header line
+                allLines.RemoveAt(0);
+                foreach (string curLine in allLines.Skip(1))
+                {
+                    //We can rely on these hardcoded values as the SeedData is static.
+                    //The seed data was generated once by a separate process
+                    //0    1(unused)        2      3               4  
+                    //Name	Notes	       Age	FakeAddresses	Hobbies (or interests)
+                    var tabEntries = curLine.Split('\t');
+                    PersonInformation newPerson = new PersonInformation()
+                    {
+                        FirstName = tabEntries[0].Split(null)[0],
+                        LastName = tabEntries[0].Split(null)[1],
+                        Age = int.Parse(tabEntries[2]),
+                        Address = tabEntries[3],
+                        Interests = tabEntries[4],
+                        PersonInformationImage = GenericImage
+                    };
+                    ret.Add(newPerson);
+                }
+
+
+            }
             return ret;
         }
 
+        private PersonImage _genericImage = null;
+
+        public PersonImage GenericImage
+        {
+            get
+            {
+                if (_genericImage == null)
+                {
+                    var currentAssembly = this.GetType().Assembly;
+
+                    using (var stream = currentAssembly.GetManifestResourceStream("JKPersonSearcherModels.DefaultProfile.png"))
+                    {
+                        byte[] buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, buffer.Length);
+                        _genericImage = new PersonImage()
+                        {
+                            Image = buffer
+                        };
+                    };
+                }
+                return _genericImage;
+            }
+
+        }
     }
 }

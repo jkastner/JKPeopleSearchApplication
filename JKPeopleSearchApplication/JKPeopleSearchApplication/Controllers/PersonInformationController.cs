@@ -16,13 +16,13 @@ namespace JKPeopleSearchApplication.Controllers
     {
         private PersonInfoContext _personInfoContext = new PersonInfoContext();
 
-        // GET: PersonInformations
+        // GET: PersonInformation
         public async Task<ActionResult> Index()
         {
             return View(await _personInfoContext.AllPersonInfo.ToListAsync());
         }
 
-        // GET: PersonInformations/Details/5
+        // GET: PersonInformation/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,18 +37,18 @@ namespace JKPeopleSearchApplication.Controllers
             return View(personInformation);
         }
 
-        // GET: PersonInformations/Create
+        // GET: PersonInformation/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: PersonInformations/Create
+        // POST: PersonInformation/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "PersonInformationId,FirstName,LastName")] PersonInformation personInformation)
+        public async Task<ActionResult> Create([Bind(Include = "PersonInformationId,FirstName,LastName,Age,Address,Interests")] PersonInformation personInformation)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace JKPeopleSearchApplication.Controllers
             return View(personInformation);
         }
 
-        // GET: PersonInformations/Edit/5
+        // GET: PersonInformation/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,12 +75,12 @@ namespace JKPeopleSearchApplication.Controllers
             return View(personInformation);
         }
 
-        // POST: PersonInformations/Edit/5
+        // POST: PersonInformation/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "PersonInformationId,FirstName,LastName")] PersonInformation personInformation)
+        public async Task<ActionResult> Edit([Bind(Include = "PersonInformationId,FirstName,LastName,Age,Address,Interests")] PersonInformation personInformation)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace JKPeopleSearchApplication.Controllers
             return View(personInformation);
         }
 
-        // GET: PersonInformations/Delete/5
+        // GET: PersonInformation/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -106,7 +106,7 @@ namespace JKPeopleSearchApplication.Controllers
             return View(personInformation);
         }
 
-        // POST: PersonInformations/Delete/5
+        // POST: PersonInformation/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -115,22 +115,6 @@ namespace JKPeopleSearchApplication.Controllers
             _personInfoContext.AllPersonInfo.Remove(personInformation);
             await _personInfoContext.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        public PartialViewResult GetAllPeople()
-        {
-            string data = Request.Params["jsonData"];
-            if (String.IsNullOrWhiteSpace(data))
-            {
-                return PartialView( _personInfoContext.AllPersonInfo.ToArray());
-            }
-            var trimmedData = data.Trim().ToLower();
-            var matchingPeople = _personInfoContext.AllPersonInfo.Where(
-                x=>
-                x.FirstName.ToLower().Contains(trimmedData) ||
-                x.LastName.ToLower().Contains(trimmedData)
-                ).ToArray();
-            return PartialView(matchingPeople);
         }
 
         protected override void Dispose(bool disposing)
@@ -142,6 +126,25 @@ namespace JKPeopleSearchApplication.Controllers
             base.Dispose(disposing);
         }
 
+
+
+        public PartialViewResult PersonSearchMatch()
+        {
+            string data = Request.Params["jsonData"];
+            if (String.IsNullOrWhiteSpace(data))
+            {
+                return PartialView(_personInfoContext.AllPersonInfo.ToArray());
+            }
+            var trimmedData = data.Trim().ToLower();
+            var matchingPeople = _personInfoContext.AllPersonInfo.Where(
+                x =>
+                x.FirstName.ToLower().Contains(trimmedData) ||
+                x.LastName.ToLower().Contains(trimmedData)
+                ).ToArray();
+            return PartialView(matchingPeople);
+        }
+
+
         public async Task<ActionResult> InsertSeedData()
         {
             var allCurrent = _personInfoContext.AllPersonInfo.ToArray();
@@ -150,7 +153,7 @@ namespace JKPeopleSearchApplication.Controllers
                 _personInfoContext.AllPersonInfo.Remove(curData);
             }
             await _personInfoContext.SaveChangesAsync();
-            var seedData = SeedData.SeedInformation();
+            var seedData = SeedData.GetSeedInformation();
             foreach (var cur in seedData)
             {
                 if (ModelState.IsValid)
@@ -163,5 +166,6 @@ namespace JKPeopleSearchApplication.Controllers
 
             return RedirectToAction("Index");
         }
+
     }
 }
