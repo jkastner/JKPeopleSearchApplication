@@ -62,7 +62,7 @@
         }
 
         function updateDivWithInfo(theResponse) {
-            if (theResponse.ResultCount === 0) {
+            if (theResponse.SearchResults.length === 0) {
                 $('#allPeople').html(theResponse.MessageInformation);
             } else {
 

@@ -21,11 +21,16 @@ namespace JKPersonSearcherModels
             return sd.SeedInformation();
         }
 
+        public static PersonImage GetGenericImage()
+        {
+            SeedData sd = new SeedData();
+            return sd.GenericImage;
+        }
+
+
         /// <summary>
         /// Generates a few hundred random names for testing purposes.
-        /// I'll probably move this to a unit test class later.
         /// </summary>
-        /// <returns></returns>
         private IReadOnlyList<PersonInformation> SeedInformation()
         {
             List<PersonInformation> ret = new List<PersonInformation>();
@@ -66,9 +71,9 @@ namespace JKPersonSearcherModels
             return ret;
         }
 
-        private PersonImage _genericImage = null;
+        private static PersonImage _genericImage = null;
 
-        public PersonImage GenericImage
+        private PersonImage GenericImage
         {
             get
             {

@@ -123,8 +123,8 @@ namespace JKPeopleSearchApplication.Controllers
             base.Dispose(disposing);
         }
 
-        private static string _noResults= SearchResultMessage.JsonFailResultWithMessage("Search yielded no results");
-        private static string _emptySearch = SearchResultMessage.JsonFailResultWithMessage("");
+        
+        
 
         public ActionResult PersonSearchMatch()
         {
@@ -136,43 +136,17 @@ namespace JKPeopleSearchApplication.Controllers
             //Likewise, we don't want to flood a regular user with thousands of results 
             //(although I like that look as it shows all my pretty data, a real user won't care.
             string data = Request.Params["searchQuery"];
-            if (String.IsNullOrWhiteSpace(data))
+            var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo);
+            if (searchResult.SearchResults.Length > 15)
             {
-                return Json(_emptySearch, JsonRequestBehavior.AllowGet);
-            }
-            var trimmedData = data.Trim().ToLower();
-            //If there are any perfect matches, we should just return those.
-            var perfectMatches = _personInfoContext.AllPersonInfo.Where(
-                x => (x.FirstName + " " + x.LastName).ToLower().Equals(data)).ToArray();
-            if (perfectMatches.Any())
-            {
-                //It's possible that there could be so many perfect matches that the system could flood.
-                //But for this sample project we're ignoring that unlikely scenario.
-                //The user would have to have some way of narrowing which John Smith they're looking for anyway.
-                var response = SearchResultMessage.JsonSuccessResultWithMessage(perfectMatches);
-                return Json(response);
-            }
-            var matchingPeople = _personInfoContext.AllPersonInfo.Where(
-                x =>
-                    x.FirstName.ToLower().Contains(trimmedData) ||
-                    x.LastName.ToLower().Contains(trimmedData)
-                ).ToArray();
-            //The user hasn't entered in enough information to narrow it, don't return anything.
-            if (matchingPeople.Length > 15)
-            {
-                return
-                    Json(
-                        SearchResultMessage.JsonFailResultWithMessage(
-                            $"{matchingPeople.Length} results. Please refine search."),
-                        JsonRequestBehavior.AllowGet);
-            }
+                //The user hasn't entered in enough information to narrow it, don't return anything.
+                var failMessage =
+                    SearchResultMessage.FailResultWithMessage(
+                        $"{searchResult.SearchResults.Length} results. Please refine search.");
 
-            if (!matchingPeople.Any())
-            {
-                return Json(_noResults, JsonRequestBehavior.AllowGet);
+                return Json(failMessage.ToJsonString(), JsonRequestBehavior.AllowGet);
             }
-            var response2 = SearchResultMessage.JsonSuccessResultWithMessage(matchingPeople);
-            return Json(response2, JsonRequestBehavior.AllowGet);
+            return Json(searchResult.ToJsonString(), JsonRequestBehavior.AllowGet);
         }
 
 
