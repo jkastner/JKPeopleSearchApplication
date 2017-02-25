@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using JKPeopleSearchApplication.Models;
 using JKPersonSearcherModels;
@@ -126,22 +123,56 @@ namespace JKPeopleSearchApplication.Controllers
             base.Dispose(disposing);
         }
 
+        private static string _noResults= SearchResultMessage.JsonFailResultWithMessage("Search yielded no results");
+        private static string _emptySearch = SearchResultMessage.JsonFailResultWithMessage("");
 
-
-        public PartialViewResult PersonSearchMatch()
+        public ActionResult PersonSearchMatch()
         {
-            string data = Request.Params["jsonData"];
+
+            //Note to self: So after doing some researching, it appears that returning many results 
+            //could be a security vulnerability.
+            //In retrospect, this makes sense -- it's not a lot of data unless someone is attempting 
+            //a DOS or there are many simulatenous users.
+            //Likewise, we don't want to flood a regular user with thousands of results 
+            //(although I like that look as it shows all my pretty data, a real user won't care.
+            string data = Request.Params["searchQuery"];
             if (String.IsNullOrWhiteSpace(data))
             {
-                return PartialView(_personInfoContext.AllPersonInfo.ToArray());
+                return Json(_emptySearch, JsonRequestBehavior.AllowGet);
             }
             var trimmedData = data.Trim().ToLower();
+            //If there are any perfect matches, we should just return those.
+            var perfectMatches = _personInfoContext.AllPersonInfo.Where(
+                x => (x.FirstName + " " + x.LastName).ToLower().Equals(data)).ToArray();
+            if (perfectMatches.Any())
+            {
+                //It's possible that there could be so many perfect matches that the system could flood.
+                //But for this sample project we're ignoring that unlikely scenario.
+                //The user would have to have some way of narrowing which John Smith they're looking for anyway.
+                var response = SearchResultMessage.JsonSuccessResultWithMessage(perfectMatches);
+                return Json(response);
+            }
             var matchingPeople = _personInfoContext.AllPersonInfo.Where(
                 x =>
-                x.FirstName.ToLower().Contains(trimmedData) ||
-                x.LastName.ToLower().Contains(trimmedData)
+                    x.FirstName.ToLower().Contains(trimmedData) ||
+                    x.LastName.ToLower().Contains(trimmedData)
                 ).ToArray();
-            return PartialView(matchingPeople);
+            //The user hasn't entered in enough information to narrow it, don't return anything.
+            if (matchingPeople.Length > 15)
+            {
+                return
+                    Json(
+                        SearchResultMessage.JsonFailResultWithMessage(
+                            $"{matchingPeople.Length} results. Please refine search."),
+                        JsonRequestBehavior.AllowGet);
+            }
+
+            if (!matchingPeople.Any())
+            {
+                return Json(_noResults, JsonRequestBehavior.AllowGet);
+            }
+            var response2 = SearchResultMessage.JsonSuccessResultWithMessage(matchingPeople);
+            return Json(response2, JsonRequestBehavior.AllowGet);
         }
 
 

@@ -21,19 +21,18 @@
 
 @section Scripts {
     <script>
-        window.onload = doneTyping();
-
 
 
         //Taken from:
         //http://stackoverflow.com/questions/4220126/run-javascript-function-when-user-finishes-typing-instead-of-on-key-up
-        var typingTimer;                //timer identifier
-        var doneTypingInterval = 250;  //time in ms
+        var typingTimer; //timer identifier
+        var doneTypingInterval = 250; //time in ms
 
-        $('#searchText').keyup(function () {
-            clearTimeout(typingTimer);
-            typingTimer = setTimeout(doneTyping, doneTypingInterval);
-        });
+        $('#searchText')
+            .keyup(function() {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            });
 
         //user is "finished typing," do something
         function doneTyping() {
@@ -44,23 +43,55 @@
         }
 
         function runSearch(myInput) {
-                $.ajax({
-                    url: '/PersonInformation/PersonSearchMatch',
-                    contentType: 'application/html; charset=utf-8',
+            $.ajax({
+                    url: "/PersonInformation/PersonSearchMatch",
+                    contentType: "application/json; charset=utf-8",
                     type: 'GET',
-                    data: { "jsonData": myInput },
-                    dataType: 'html'
+                    data: { "searchQuery": myInput },
+                    dataType: "json"
 
                 })
-                    .success(function (result) {
-                        $('#allPeople').html(result);
-                    })
-                    .error(function(xhr, status) {
-                        
-                        alert(status);
-                    });
-            }
+                .success(function(result) {
+                    var resultObjects = JSON.parse(result);
+                    updateDivWithInfo(resultObjects);
+                    //$('#allPeople').html(resultObjects);
+                })
+                .error(function(xhr, status) {
+                    alert(status);
+                });
+        }
 
+        function updateDivWithInfo(theResponse) {
+            if (theResponse.ResultCount === 0) {
+                $('#allPeople').html(theResponse.MessageInformation);
+            } else {
+
+                var myTable = '<table style=width:100%>';
+                myTable += '<tr>';
+                myTable += '<th>First Name</th>';
+                myTable += '<th>Last Name</th>';
+                myTable += '<th>Age</th>';
+                myTable += '<th>Address</th>';
+                myTable += '<th>Interests</th>';
+                myTable += '<th>Image</th>';
+                myTable += '</tr>';
+                var curRow;
+                for (var q = 0; q < theResponse.SearchResults.length; q++) {
+                    curRow = '<tr>';
+                    var curInfo = theResponse.SearchResults[q];
+                    curRow += '<td>' + curInfo.FirstName + '</td>';
+                    curRow += '<td>' + curInfo.LastName + '</td>';
+                    curRow += '<td>' + curInfo.Age + '</td>';
+                    curRow += '<td>' + curInfo.Address + '</td>';
+                    curRow += '<td>' + curInfo.Interests + '</td>';
+                    curRow += '<td><img src="data:image;base64,' + curInfo.PersonInformationImage.Image + '" Height="80" Width="80" alt="IMAGES" /><td>';
+                    curRow += '<tr>';
+                    myTable += curRow;
+                }
+                myTable += '</table>';
+                $('#allPeople').html(myTable);
+            }
+        }
 
 
     </script>
