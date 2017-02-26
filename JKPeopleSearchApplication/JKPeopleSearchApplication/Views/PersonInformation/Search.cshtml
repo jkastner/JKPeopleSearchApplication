@@ -62,34 +62,17 @@
             typingTimer = setTimeout(doneTyping, doneTypingInterval);
         }
 
-        function serverDelayChanged() {
-            var serverDelayInput = $('#delayMsInput').val();
-            $.ajax({
-                url: "/PersonInformation/SetServerDelay",
-                contentType: "application/json; charset=utf-8",
-                type: 'GET',
-                data: { "serverDelay": serverDelayInput },
-                dataType: "json"
-
-            })
-               .success(function () {
-                   
-               })
-               .error(function (xhr, status) {
-                   alert(status);
-               });
-        }
-
         //user is "finished typing," do something
         function doneTyping() {
             var currentInput = $('#searchText').val();
-            runSearch(currentInput);
+            var curServerDelay = $('#delayMsInput').val();
+            runSearch(currentInput, curServerDelay);
         }
 
 
         var lastSearchRequest = new Date().getMilliseconds();
-        function runSearch(myInput) {
-            $('#searchMessaging').html("Searching for '"+myInput+"'...");
+        function runSearch(curSearchText, curServerDelay) {
+            $('#searchMessaging').html("Searching for '" + curSearchText + "'...");
             var timeStamp = new Date().getMilliseconds();
             lastSearchRequest = timeStamp;
             $.ajax({
@@ -97,7 +80,8 @@
                     contentType: "application/json; charset=utf-8",
                     type: 'GET',
                     data: {
-                        "searchQuery": myInput,
+                        "searchQuery": curSearchText,
+                        "serverDelay": curServerDelay,
                         "timeStamp": timeStamp
                     },
                     dataType: "json"

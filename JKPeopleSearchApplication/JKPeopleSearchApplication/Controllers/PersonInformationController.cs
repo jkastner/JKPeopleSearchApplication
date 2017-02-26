@@ -18,7 +18,6 @@ namespace JKPeopleSearchApplication.Controllers
         // GET: PersonInformation
         public ActionResult Search()
         {
-            Session["serverDelay"] = 0;
             return View();
         }
 
@@ -133,11 +132,19 @@ namespace JKPeopleSearchApplication.Controllers
         {
             string data = Request.Params["searchQuery"];
             string requestTimeStamp = Request.Params["timeStamp"];
+            string serverDelay = Request.Params["serverDelay"];
 
-            if (Session["serverDelay"] != null)
+            //Artificial delay for slowing search
+            if (!String.IsNullOrWhiteSpace(serverDelay))
             {
-                var readDelay = (int) Session["serverDelay"];
-                Thread.Sleep(readDelay);
+                int delayVal = 0;
+                if (int.TryParse(serverDelay, out delayVal))
+                {
+                    if (delayVal <= 15000 && delayVal >= 0)
+                    {
+                        Thread.Sleep(delayVal);
+                    }
+                }
             }
             
             var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo.ToList());
@@ -154,23 +161,6 @@ namespace JKPeopleSearchApplication.Controllers
             }
             return Json(searchResult.ToJsonString(), JsonRequestBehavior.AllowGet);
         }
-
-
-        public ActionResult SetServerDelay()
-        {
-            string newDelay = Request.Params["serverDelay"];
-            int delayVal = 0;
-            if (int.TryParse(newDelay, out delayVal))
-            {
-                if (delayVal <= 15000 && delayVal >= 0)
-                {
-                    Session["serverDelay"] = delayVal;
-                    return Json(true, JsonRequestBehavior.AllowGet);
-                }
-            }
-            return Json(false, JsonRequestBehavior.AllowGet);
-        }
-
 
         public ActionResult GetNameSuggestions()
         {
