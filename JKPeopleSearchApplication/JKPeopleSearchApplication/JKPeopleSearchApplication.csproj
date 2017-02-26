@@ -250,7 +250,7 @@
     <Content Include="Views\PersonInformation\Delete.cshtml" />
     <Content Include="Views\PersonInformation\Details.cshtml" />
     <Content Include="Views\PersonInformation\Edit.cshtml" />
-    <Content Include="Views\PersonInformation\Index.cshtml" />
+    <Content Include="Views\PersonInformation\Search.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>

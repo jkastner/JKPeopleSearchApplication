@@ -30,16 +30,23 @@ namespace JKSearchTests
         [TestMethod]
         public void SearchEmptyText()
         {
-            var results = PersonSearcher.SearchForMatch("", _myInfo);
+            var results = PersonSearcher.SearchForMatch("", _myInfo, NowString());
             Assert.AreEqual(results.SearchResultTypeDescription, SearchResultType.NoResults);
             Assert.IsTrue(results.SearchResults != null);
             Assert.IsTrue(results.SearchResults.Length==0);
         }
 
+        private string NowString()
+        {
+            var curTime = DateTime.Now.Ticks;
+            var msTime = curTime/TimeSpan.TicksPerMillisecond;
+            return msTime.ToString();
+        }
+
         [TestMethod]
         public void SearchSingleLetter()
         {
-            var results = PersonSearcher.SearchForMatch("a", _myInfo);
+            var results = PersonSearcher.SearchForMatch("a", _myInfo, NowString());
             Assert.AreEqual(results.SearchResultTypeDescription, SearchResultType.SuccessfulSearch);
             Assert.IsTrue(results.SearchResults.Length > 0);
         }
@@ -48,8 +55,8 @@ namespace JKSearchTests
         [TestMethod]
         public void SearchCaseInsensitive()
         {
-            var results = PersonSearcher.SearchForMatch("st", _myInfo);
-            var resultsUpper = PersonSearcher.SearchForMatch("ST", _myInfo);
+            var results = PersonSearcher.SearchForMatch("st", _myInfo, NowString());
+            var resultsUpper = PersonSearcher.SearchForMatch("ST", _myInfo, NowString());
 
             Assert.IsTrue(results.SearchResultTypeDescription==SearchResultType.SuccessfulSearch);
             Assert.AreEqual(results.SearchResultTypeDescription, resultsUpper.SearchResultTypeDescription);
@@ -61,7 +68,7 @@ namespace JKSearchTests
         public void SearchNonsense()
         {
             var garbageSearch = Guid.NewGuid() + "" + Guid.NewGuid();
-            var res = PersonSearcher.SearchForMatch(garbageSearch, _myInfo);
+            var res = PersonSearcher.SearchForMatch(garbageSearch, _myInfo, NowString());
             Assert.IsTrue(res.SearchResultTypeDescription==SearchResultType.NoResults);
             Assert.IsTrue(res.SearchResults.Length==0);
         }
@@ -71,7 +78,7 @@ namespace JKSearchTests
         {
             var newSample = GenerateSamplePerson();
             _myInfo.Add(newSample);
-            var res = PersonSearcher.SearchForMatch("Unlikely", _myInfo);
+            var res = PersonSearcher.SearchForMatch("Unlikely", _myInfo, NowString());
             Assert.IsTrue(res.SearchResultTypeDescription==SearchResultType.SuccessfulSearch);
             Assert.IsTrue(res.SearchResults.Length == 1);
             Assert.AreEqual(res.SearchResults.First(), newSample);
@@ -103,7 +110,7 @@ namespace JKSearchTests
             {
                 _myInfo.Add(GenerateSamplePerson());
             }
-            var result = PersonSearcher.SearchForMatch(DummyFirstName + " " + DummyLastName, _myInfo);
+            var result = PersonSearcher.SearchForMatch(DummyFirstName + " " + DummyLastName, _myInfo, NowString());
             Assert.AreEqual(duplicateEntries, result.SearchResults.Length);
             Assert.AreEqual(result.SearchResultTypeDescription, SearchResultType.PerfectMatch);
         }

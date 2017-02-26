@@ -11,16 +11,14 @@ namespace JKPeopleSearchApplication
     public static class PersonSearcher
     {
 
-        private static SearchResultMessage _noResults = SearchResultMessage.FailResultWithMessage("Search yielded no results");
-        private static SearchResultMessage _emptySearch = SearchResultMessage.FailResultWithMessage("");
         [Pure]
         public static SearchResultMessage SearchForMatch(String searchInput,
-            IEnumerable<PersonInformation> searchParam)
+            IEnumerable<PersonInformation> searchParam, String requestTimeStamp)
         {
             var fixedInput = searchInput.Trim().ToLower();
             if (String.IsNullOrWhiteSpace(fixedInput))
             {
-                return _emptySearch;
+                return SearchResultMessage.FailResultWithMessage("", requestTimeStamp);
             }
             var searchTargets = searchParam.ToList();
 
@@ -31,8 +29,10 @@ namespace JKPeopleSearchApplication
             {
                 //It's possible that there could be so many perfect matches that the system could flood.
                 //But for this sample project we're ignoring that unlikely scenario.
-                //The user would have to have some way of narrowing which John Smith they're looking for anyway.
-                var ret = SearchResultMessage.SuccessResultWithMessage(perfectMatches);
+                //The user would have to have some way of narrowing which John Smith they're 
+                //looking for anyway.
+                var ret = SearchResultMessage.SuccessResultWithMessage(perfectMatches, searchInput,
+                    requestTimeStamp);
                 ret.SearchResultTypeDescription = SearchResultType.PerfectMatch;
                 return ret;
             }
@@ -44,11 +44,12 @@ namespace JKPeopleSearchApplication
 
             if (matchingPeople.Any())
             {
-                return SearchResultMessage.SuccessResultWithMessage(matchingPeople);
+                return SearchResultMessage.SuccessResultWithMessage(matchingPeople, searchInput, requestTimeStamp);
             }
             else
             {
-                return _noResults;
+                return SearchResultMessage.FailResultWithMessage($"Search for {searchInput} yielded no results.",
+                    requestTimeStamp);
             }
         }
 

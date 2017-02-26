@@ -1,28 +1,44 @@
 ﻿@model IEnumerable<JKPersonSearcherModels.PersonInformation>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-    @Html.ActionLink("Create Seed Data", "InsertSeedData")
-</p>
-<div style="width:600px; margin-left:auto; margin-right:auto">
+<table>
+    <tr>
+        <td>
+            @Html.ActionLink("Create New", "Create")
+        </td>
+        <td style="padding-left: 10px">
+            @Html.ActionLink("Reset Data", "InsertSeedData")
+        </td>
+        <td style="padding-left: 10px">
+            Artificial Search Delay: 
+            <input type="number" id="delayMsInput"
+                   max="15000" min="0" value="0"
+                   oninput="serverDelayChanged()"
+                   placeholder="Server delay (ms)"/>
+
+        </td>
+    </tr>
+</table>
+<div style="align-self: stretch; margin-left:auto; margin-right:auto">
     <div style="background-color: lightgray">
         <h2>Person Search</h2>
     </div>
     <p>Type any part of the first or last name to search</p>
     <span>
         <input class="awesomplete"
-               oninput="myInput()"
+               maxlength="150"
+               oninput="searchInputChanged()"
                id="searchText" 
                type="text"
                placeholder="Search..."
                 />
     </span>
+    <div id="searchMessaging"></div>
     <div id="allPeople" ></div>
 </div>
 
@@ -41,9 +57,27 @@
         var doneTypingInterval = 250; //time in ms
 
 
-        function myInput() {
+        function searchInputChanged() {
             clearTimeout(typingTimer);
             typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        }
+
+        function serverDelayChanged() {
+            var serverDelayInput = $('#delayMsInput').val();
+            $.ajax({
+                url: "/PersonInformation/SetServerDelay",
+                contentType: "application/json; charset=utf-8",
+                type: 'GET',
+                data: { "serverDelay": serverDelayInput },
+                dataType: "json"
+
+            })
+               .success(function () {
+                   
+               })
+               .error(function (xhr, status) {
+                   alert(status);
+               });
         }
 
         //user is "finished typing," do something
@@ -53,17 +87,25 @@
         }
 
 
+        var lastSearchRequest = new Date().getMilliseconds();
         function runSearch(myInput) {
+            $('#searchMessaging').html("Searching for '"+myInput+"'...");
+            var timeStamp = new Date().getMilliseconds();
+            lastSearchRequest = timeStamp;
             $.ajax({
                     url: "/PersonInformation/PersonSearchMatch",
                     contentType: "application/json; charset=utf-8",
                     type: 'GET',
-                    data: { "searchQuery": myInput },
+                    data: {
+                        "searchQuery": myInput,
+                        "timeStamp": timeStamp
+                    },
                     dataType: "json"
 
                 })
-                .success(function(result) {
+                .success(function (result) {
                     var resultObjects = JSON.parse(result);
+
                     updateDivWithInfo(resultObjects);
                 })
                 .error(function(xhr, status) {
@@ -94,10 +136,15 @@
             'style="margin:15px 15px"' +
             'Height="120" ALIGN="left" Width="120" alt="Profile Picture" />' + templateWithoutPicture;
         function updateDivWithInfo(theResponse) {
-            if (theResponse.SearchResults.length === 0) {
-                $('#allPeople').html(theResponse.MessageInformation);
-            } else {
+            if (theResponse.RequestTimeStamp != lastSearchRequest) {
+                //The user has entered more input, ignore this result.
+                return;
+            }
 
+            $('#searchMessaging').html(theResponse.MessageInformation);
+
+
+            if (theResponse.SearchResults.length != 0) {
                 var myTable = '<table style=width:100%>';
                 var curRow;
                 for (var q = 0; q < theResponse.SearchResults.length; q++) {
@@ -114,16 +161,6 @@
                     
 
                     var html = Mustache.to_html(curTemplate, curInfo);
-                    //curRow +=  curInfo.FirstName;
-                    //curRow +=  curInfo.LastName;
-                    //curRow +=  curInfo.Age;
-                    //curRow +=  curInfo.Address;
-                    //curRow +=  curInfo.Interests;
-                    //if (curInfo.PersonInformationImage != null && curInfo.PersonInformationImage.Image != null) {
-                    //    curRow += '<img src="data:image;base64,' +
-                    //    curInfo.PersonInformationImage.Image +
-                    //    '" Height="80" Width="80" alt="Profile Picture" />';
-                    //}
                     curRow += html;
                     curRow += '</td></tr>';
                     myTable += curRow;

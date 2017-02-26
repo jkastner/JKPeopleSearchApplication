@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Threading;
 using System.Web.Mvc;
 using JKPeopleSearchApplication.Models;
 using JKPersonSearcherModels;
@@ -15,9 +16,10 @@ namespace JKPeopleSearchApplication.Controllers
         private PersonInfoContext _personInfoContext = new PersonInfoContext();
 
         // GET: PersonInformation
-        public async Task<ActionResult> Index()
+        public ActionResult Search()
         {
-            return View(await _personInfoContext.AllPersonInfo.ToListAsync());
+            Session["serverDelay"] = 0;
+            return View();
         }
 
         // GET: PersonInformation/Details/5
@@ -52,7 +54,7 @@ namespace JKPeopleSearchApplication.Controllers
             {
                 _personInfoContext.AllPersonInfo.Add(personInformation);
                 await _personInfoContext.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Search");
             }
 
             return View(personInformation);
@@ -84,7 +86,7 @@ namespace JKPeopleSearchApplication.Controllers
             {
                 _personInfoContext.Entry(personInformation).State = EntityState.Modified;
                 await _personInfoContext.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Search");
             }
             return View(personInformation);
         }
@@ -112,7 +114,7 @@ namespace JKPeopleSearchApplication.Controllers
             PersonInformation personInformation = await _personInfoContext.AllPersonInfo.FindAsync(id);
             _personInfoContext.AllPersonInfo.Remove(personInformation);
             await _personInfoContext.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Search");
         }
 
         protected override void Dispose(bool disposing)
@@ -129,25 +131,41 @@ namespace JKPeopleSearchApplication.Controllers
 
         public ActionResult PersonSearchMatch()
         {
-
-            //Note to self: So after doing some researching, it appears that returning many results 
-            //could be a security vulnerability.
-            //In retrospect, this makes sense -- it's not a lot of data unless someone is attempting 
-            //a DOS or there are many simulatenous users.
-            //Likewise, we don't want to flood a regular user with thousands of results 
-            //(although I like that look as it shows all my pretty data, a real user won't care.
             string data = Request.Params["searchQuery"];
-            var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo.ToList());
-            if (searchResult.SearchResults.Length > 15)
+            string requestTimeStamp = Request.Params["timeStamp"];
+
+            if (Session["serverDelay"] != null)
+            {
+                var readDelay = (int) Session["serverDelay"];
+                Thread.Sleep(readDelay);
+            }
+            
+            var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo.ToList(), requestTimeStamp);
+            if (searchResult.SearchResults.Length > 20)
             {
                 //The user hasn't entered in enough information to narrow it, don't return anything.
                 var failMessage =
                     SearchResultMessage.FailResultWithMessage(
-                        $"{searchResult.SearchResults.Length} results. Please refine search.");
-
+                        $"{searchResult.SearchResults.Length} results for '{data}'. Please refine search.", requestTimeStamp);
                 return Json(failMessage.ToJsonString(), JsonRequestBehavior.AllowGet);
             }
             return Json(searchResult.ToJsonString(), JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult SetServerDelay()
+        {
+            string newDelay = Request.Params["serverDelay"];
+            int delayVal = 0;
+            if (int.TryParse(newDelay, out delayVal))
+            {
+                if (delayVal <= 15000 && delayVal >= 0)
+                {
+                    Session["serverDelay"] = delayVal;
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -178,7 +196,7 @@ namespace JKPeopleSearchApplication.Controllers
             await _personInfoContext.SaveChangesAsync();
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Search");
         }
 
     }
