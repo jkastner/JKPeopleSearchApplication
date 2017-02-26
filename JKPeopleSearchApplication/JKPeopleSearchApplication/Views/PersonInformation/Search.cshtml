@@ -4,8 +4,10 @@
     ViewBag.Title = "Search";
 }
 
-<h2>Index</h2>
-
+<h2>Search</h2>
+<div id="suggestionText" >
+    
+</div>
 <table>
     <tr>
         <td>
@@ -93,7 +95,7 @@
                     updateDivWithInfo(resultObjects);
                 })
                 .error(function(xhr, status) {
-                    alert(status);
+                    alert("Error parsing results " +status);
                 });
         }
 
@@ -103,12 +105,17 @@
                     type: 'GET'
                 })
                 .success(function(result) {
+                    if (result.length == 0) {
+                        
+                        $('#suggestionText').html('<h5><strong>No data populated. Click "Reset Data" to populate with sample data, or "Create New" to populate by hand<strong></h4>');
+                    }
+                    
                     var input = document.getElementById("searchText");
                     var awesomplete = new Awesomplete(input);
                     awesomplete.list = result;
                 })
                 .error(function(xhr, status) {
-                    alert(status);
+                    alert("Error loading suggestion list. "+status);
                 });
         }
 
