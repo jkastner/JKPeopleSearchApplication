@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,10 +17,10 @@ namespace JKPersonSearcherModels
 
         }
 
-        public static IReadOnlyList<PersonInformation> GetSeedInformation()
+        public static IReadOnlyList<PersonInformation> GetSeedInformation(bool randomizeImages)
         {
             SeedData sd = new SeedData();
-            return sd.SeedInformation();
+            return sd.SeedInformation(randomizeImages);
         }
 
         public static PersonImage GetGenericImage()
@@ -27,11 +29,14 @@ namespace JKPersonSearcherModels
             return sd.GenericImage;
         }
 
+        //Used to randomize profile pictures
+        static Random _random = new Random();
+
 
         /// <summary>
         /// Generates a few hundred random names for testing purposes.
         /// </summary>
-        private IReadOnlyList<PersonInformation> SeedInformation()
+        private IReadOnlyList<PersonInformation> SeedInformation(bool randomizeImages)
         {
             List<PersonInformation> ret = new List<PersonInformation>();
             var currentAssembly = this.GetType().Assembly;
@@ -54,6 +59,13 @@ namespace JKPersonSearcherModels
                     //0    1(unused)        2      3               4  
                     //Name	Notes	       Age	FakeAddresses	Hobbies (or interests)
                     var tabEntries = curLine.Split('\t');
+
+                    var selectedImage = GenericImage;
+                    if (randomizeImages && _random.NextDouble() > .5)
+                    {
+                        //We use the smaller image so the recoloring won't take too long.
+                        selectedImage = ProduceAlteredImage();
+                    }
                     PersonInformation newPerson = new PersonInformation()
                     {
                         FirstName = tabEntries[0].Split(null)[0],
@@ -61,7 +73,7 @@ namespace JKPersonSearcherModels
                         Age = int.Parse(tabEntries[2]),
                         Address = tabEntries[3],
                         Interests = tabEntries[4],
-                        PersonInformationImage = GenericImage
+                        PersonInformationImage = selectedImage
                     };
                     ret.Add(newPerson);
                 }
@@ -70,6 +82,72 @@ namespace JKPersonSearcherModels
             }
             return ret;
         }
+
+        /// <summary>
+        /// This is used to randomize the background color of the profile image,
+        ///  to showcase some variety.
+        /// </summary>
+        private PersonImage ProduceAlteredImage()
+        {
+            Bitmap profileImage;
+            using (var ms = new MemoryStream(SmallImage.Image))
+            {
+                profileImage = new Bitmap(ms);
+            }
+            Color randomColor = Color.FromArgb(_random.Next(0, 255), _random.Next(0, 255), _random.Next(0, 255));
+            for (int x = 0; x < profileImage.Width; x++)
+            {
+                for (int y = 0; y < profileImage.Height; y++)
+                {
+                    Color gotColor = profileImage.GetPixel(x, y);
+                    if (!AlmostBlack(gotColor))
+                    {
+                        profileImage.SetPixel(x, y, randomColor);
+                    }
+                }
+            }
+            Byte[] bytes;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                profileImage.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                bytes = stream.ToArray();
+            }
+            return new PersonImage()
+            {
+                Image = bytes,
+            };
+
+        }
+
+        private bool AlmostBlack(Color gotColor)
+        {
+            return gotColor.R < 2 && gotColor.B < 2 && gotColor.G < 2;
+        }
+
+        private static PersonImage _smallImage = null;
+
+        private PersonImage SmallImage
+        {
+            get
+            {
+                if (_smallImage == null)
+                {
+                    var currentAssembly = this.GetType().Assembly;
+
+                    using (var stream = currentAssembly.GetManifestResourceStream("JKPersonSearcherModels.SmallProfile.png"))
+                    {
+                        byte[] buffer = new byte[stream.Length];
+                        stream.Read(buffer, 0, buffer.Length);
+                        _smallImage = new PersonImage()
+                        {
+                            Image = buffer
+                        };
+                    };
+                }
+                return _smallImage;
+            }
+        }
+
 
         private static PersonImage _genericImage = null;
 

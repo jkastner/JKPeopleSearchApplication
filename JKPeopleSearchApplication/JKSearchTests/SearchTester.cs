@@ -17,7 +17,7 @@ namespace JKSearchTests
         [TestInitialize]
         public void DataSetup()
         {
-            _myInfo = SeedData.GetSeedInformation().ToList();
+            _myInfo = SeedData.GetSeedInformation(false).ToList();
         }
 
         [TestMethod]

@@ -4,7 +4,7 @@
     ViewBag.Title = "Search";
 }
 
-<h2>Search</h2>
+<h3>Configuration</h3>
 <div id="suggestionText" >
     
 </div>
@@ -15,6 +15,9 @@
         </td>
         <td style="padding-left: 10px">
             @Html.ActionLink("Reset Data", "InsertSeedData")
+        </td>
+        <td style="padding-left: 10px">
+            @Html.ActionLink("Reset Data with random images (takes longer)", "InsertSeedDataRandomImages")
         </td>
         <td style="padding-left: 10px">
             Artificial Search Delay: 

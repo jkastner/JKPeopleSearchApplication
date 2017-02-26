@@ -149,7 +149,7 @@ namespace JKPeopleSearchApplication.Controllers
             
             var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo.ToList());
             searchResult.RequestTimeStamp = requestTimeStamp;
-            if (searchResult.SearchResults.Length > 20)
+            if (searchResult.SearchResults.Length > 40)
             {
                 //The user hasn't entered in enough information to narrow it, don't return anything.
                 var failMessage =
@@ -172,13 +172,18 @@ namespace JKPeopleSearchApplication.Controllers
 
         public async Task<ActionResult> InsertSeedData()
         {
+            return await ResetData(false);
+        }
+
+        private async Task<ActionResult> ResetData(bool randomizeImages)
+        {
             var allCurrent = _personInfoContext.AllPersonInfo.ToArray();
             foreach (var curData in allCurrent)
             {
                 _personInfoContext.AllPersonInfo.Remove(curData);
             }
             await _personInfoContext.SaveChangesAsync();
-            var seedData = SeedData.GetSeedInformation();
+            var seedData = SeedData.GetSeedInformation(randomizeImages);
             foreach (var cur in seedData)
             {
                 if (ModelState.IsValid)
@@ -190,7 +195,12 @@ namespace JKPeopleSearchApplication.Controllers
 
 
             return RedirectToAction("Search");
+
         }
 
+        public async Task<ActionResult> InsertSeedDataRandomImages()
+        {
+            return await ResetData(true);
+        }
     }
 }
