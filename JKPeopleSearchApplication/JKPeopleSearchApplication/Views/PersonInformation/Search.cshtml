@@ -158,7 +158,7 @@
                     if (curInfo.PersonInformationImage != null && curInfo.PersonInformationImage.Image != null) {
                         curTemplate = templateWithPicture;
                     }
-                    
+
 
                     var html = Mustache.to_html(curTemplate, curInfo);
                     curRow += html;
@@ -167,6 +167,8 @@
                 }
                 myTable += '</table>';
                 $('#allPeople').html(myTable);
+            } else {
+                $('#allPeople').html('');
             }
         }
 

@@ -13,12 +13,12 @@ namespace JKPeopleSearchApplication
 
         [Pure]
         public static SearchResultMessage SearchForMatch(String searchInput,
-            IEnumerable<PersonInformation> searchParam, String requestTimeStamp)
+            IEnumerable<PersonInformation> searchParam)
         {
             var fixedInput = searchInput.Trim().ToLower();
             if (String.IsNullOrWhiteSpace(fixedInput))
             {
-                return SearchResultMessage.FailResultWithMessage("", requestTimeStamp);
+                return new SearchResultMessage(searchInput, new PersonInformation[0], SearchResultType.NoResults);
             }
             var searchTargets = searchParam.ToList();
 
@@ -31,8 +31,13 @@ namespace JKPeopleSearchApplication
                 //But for this sample project we're ignoring that unlikely scenario.
                 //The user would have to have some way of narrowing which John Smith they're 
                 //looking for anyway.
-                var ret = SearchResultMessage.SuccessResultWithMessage(perfectMatches, searchInput,
-                    requestTimeStamp);
+
+
+                var ret =
+                    new SearchResultMessage(
+                        $"Search for '{searchInput}' succeeded with {perfectMatches.Length} results.", 
+                        perfectMatches,
+                        SearchResultType.PerfectMatch);
                 ret.SearchResultTypeDescription = SearchResultType.PerfectMatch;
                 return ret;
             }
@@ -44,14 +49,13 @@ namespace JKPeopleSearchApplication
 
             if (matchingPeople.Any())
             {
-                return SearchResultMessage.SuccessResultWithMessage(matchingPeople, searchInput, requestTimeStamp);
+                return new SearchResultMessage($"Search for '{searchInput}' succeeded with {matchingPeople.Length} results.", matchingPeople, SearchResultType.SuccessfulSearch);
             }
             else
             {
-                return SearchResultMessage.FailResultWithMessage($"Search for {searchInput} yielded no results.",
-                    requestTimeStamp);
+                return new SearchResultMessage($"Search for {searchInput} yielded no results.", new PersonInformation[0],
+                    SearchResultType.NoResults); 
             }
         }
-
     }
 }

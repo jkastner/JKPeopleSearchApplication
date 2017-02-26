@@ -140,13 +140,16 @@ namespace JKPeopleSearchApplication.Controllers
                 Thread.Sleep(readDelay);
             }
             
-            var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo.ToList(), requestTimeStamp);
+            var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo.ToList());
+            searchResult.RequestTimeStamp = requestTimeStamp;
             if (searchResult.SearchResults.Length > 20)
             {
                 //The user hasn't entered in enough information to narrow it, don't return anything.
                 var failMessage =
-                    SearchResultMessage.FailResultWithMessage(
-                        $"{searchResult.SearchResults.Length} results for '{data}'. Please refine search.", requestTimeStamp);
+                    new SearchResultMessage(
+                        $"{searchResult.SearchResults.Length} results for '{data}'. Please refine search.",
+                        new PersonInformation[0], SearchResultType.TooManyResults);
+                failMessage.RequestTimeStamp = requestTimeStamp;
                 return Json(failMessage.ToJsonString(), JsonRequestBehavior.AllowGet);
             }
             return Json(searchResult.ToJsonString(), JsonRequestBehavior.AllowGet);

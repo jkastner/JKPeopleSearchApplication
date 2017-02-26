@@ -5,6 +5,7 @@
         Undefined,
         SuccessfulSearch,
         PerfectMatch,
-        NoResults
+        NoResults,
+        TooManyResults
     }
 }

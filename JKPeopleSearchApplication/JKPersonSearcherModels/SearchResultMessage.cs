@@ -13,31 +13,15 @@ namespace JKPersonSearcherModels
         public string RequestTimeStamp { get; set; }
 
 
-        public static SearchResultMessage FailResultWithMessage(string message, string requestTimeStamp)
+        public SearchResultMessage(string messageInformation, 
+            PersonInformation[] searchResults,
+            SearchResultType searchResultTypeDescription)
         {
-            var ret = new SearchResultMessage()
-            {
-                SearchResults = new PersonInformation[0],
-                MessageInformation = message,
-                RequestTimeStamp = requestTimeStamp,
-                SearchResultTypeDescription = SearchResultType.NoResults
-            };
-            return ret;
+            MessageInformation = messageInformation;
+            SearchResults = searchResults;
+            SearchResultTypeDescription = searchResultTypeDescription;
         }
 
-        public static SearchResultMessage SuccessResultWithMessage(IEnumerable<PersonInformation> foundInfo,
-            String searchInput, String requestTimeStamp)
-        {
-            var infoArray = foundInfo.ToArray();
-            var ret = new SearchResultMessage()
-            {
-                SearchResults = infoArray,
-                RequestTimeStamp = requestTimeStamp,
-                MessageInformation = $"Search for '{searchInput}' succeeded with {infoArray.Length} results.",
-                SearchResultTypeDescription = SearchResultType.SuccessfulSearch
-            };
-            return ret;
-        }
 
 
         [Pure]
