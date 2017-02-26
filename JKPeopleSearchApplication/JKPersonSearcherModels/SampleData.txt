@@ -326,7 +326,7 @@ Garfield Queshire		55	41B Golf St. Mansfield, MA 02048	Illusion
 Dom Morris		27	20 Harvard St. Cumming, GA 30040	Bicycle Polo
 Jayne Atterberry		41	7271 Paris Hill Drive Cranberry Twp, PA 16066	Sand Castles
 Charity Fleming		61	83 Lake Forest Lane New York, NY 10002	Going to movies
-Jodi Usage:		19	45 E. Hanover Street Valley Stream, NY 11580	Home Repair
+Jodi Usage		19	45 E. Hanover Street Valley Stream, NY 11580	Home Repair
 Renita Nathans		51	45 South Briarwood Ave. Flemington, NJ 08822	Handwriting Analysis
 Valarie Lukeson		53	8873 Newport St. Raleigh, NC 27603	Bicycle Polo
 Tex Wilkerson		50	65 Brickell Road North Royalton, OH 44133	Tombstone Rubbing

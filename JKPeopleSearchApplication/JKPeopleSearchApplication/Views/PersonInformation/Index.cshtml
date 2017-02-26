@@ -23,33 +23,35 @@
                placeholder="Search..."
                 />
     </span>
-    <div id="allPeople" style="background-color:lightskyblue"></div>
+    <div id="allPeople" ></div>
 </div>
 
 @section Scripts {
     <script>
         window.onload = populateSuggestions();
-        document.getElementById('searchText').addEventListener('awesomplete-selectcomplete', function () {
-            doneTyping();
-            document.getElementById('searchText').close();
-        });
+        document.getElementById('searchText')
+            .addEventListener('awesomplete-selectcomplete',
+                function() {
+                    doneTyping();
+                    document.getElementById('searchText').close();
+                });
         //Taken from:
         //http://stackoverflow.com/questions/4220126/run-javascript-function-when-user-finishes-typing-instead-of-on-key-up
         var typingTimer; //timer identifier
         var doneTypingInterval = 250; //time in ms
 
-        
+
         function myInput() {
             clearTimeout(typingTimer);
             typingTimer = setTimeout(doneTyping, doneTypingInterval);
         }
+
         //user is "finished typing," do something
         function doneTyping() {
             var currentInput = $('#searchText').val();
             runSearch(currentInput);
         }
 
-        
 
         function runSearch(myInput) {
             $.ajax({
@@ -63,7 +65,6 @@
                 .success(function(result) {
                     var resultObjects = JSON.parse(result);
                     updateDivWithInfo(resultObjects);
-                    //$('#allPeople').html(resultObjects);
                 })
                 .error(function(xhr, status) {
                     alert(status);
@@ -75,7 +76,7 @@
                     url: "/PersonInformation/GetNameSuggestions",
                     type: 'GET'
                 })
-                .success(function (result) {
+                .success(function(result) {
                     var input = document.getElementById("searchText");
                     var awesomplete = new Awesomplete(input);
                     awesomplete.list = result;
@@ -85,33 +86,46 @@
                 });
         }
 
+        var templateWithoutPicture = '<h3>{{FirstName}} {{LastName}}</h3>' +
+            '<strong>Address:</strong> {{Address}}<br/><strong>Age:</strong> {{Age}}<br/>' +
+            '<strong>Interests:</strong> {{Interests}}<br/><br/><br/>';
+        var templateWithPicture = '<img src="data:image;base64,{{PersonInformationImage.Image}}"' +
+
+            'style="margin:15px 15px"' +
+            'Height="120" ALIGN="left" Width="120" alt="Profile Picture" />' + templateWithoutPicture;
         function updateDivWithInfo(theResponse) {
             if (theResponse.SearchResults.length === 0) {
                 $('#allPeople').html(theResponse.MessageInformation);
             } else {
 
                 var myTable = '<table style=width:100%>';
-                myTable += '<tr>';
-                myTable += '<th>First Name</th>';
-                myTable += '<th>Last Name</th>';
-                myTable += '<th>Age</th>';
-                myTable += '<th>Address</th>';
-                myTable += '<th>Interests</th>';
-                myTable += '<th>Image</th>';
-                myTable += '</tr>';
                 var curRow;
                 for (var q = 0; q < theResponse.SearchResults.length; q++) {
-                    curRow = '<tr>';
+
+                    curRow = '<tr><td>';
                     var curInfo = theResponse.SearchResults[q];
-                    curRow += '<td>' + curInfo.FirstName + '</td>';
-                    curRow += '<td>' + curInfo.LastName + '</td>';
-                    curRow += '<td>' + curInfo.Age + '</td>';
-                    curRow += '<td>' + curInfo.Address + '</td>';
-                    curRow += '<td>' + curInfo.Interests + '</td>';
-                    curRow += '<td><img src="data:image;base64,' +
-                        curInfo.PersonInformationImage.Image +
-                        '" Height="80" Width="80" alt="IMAGES" /><td>';
-                    curRow += '<tr>';
+
+                    var curTemplate = templateWithoutPicture;
+
+
+                    if (curInfo.PersonInformationImage != null && curInfo.PersonInformationImage.Image != null) {
+                        curTemplate = templateWithPicture;
+                    }
+                    
+
+                    var html = Mustache.to_html(curTemplate, curInfo);
+                    //curRow +=  curInfo.FirstName;
+                    //curRow +=  curInfo.LastName;
+                    //curRow +=  curInfo.Age;
+                    //curRow +=  curInfo.Address;
+                    //curRow +=  curInfo.Interests;
+                    //if (curInfo.PersonInformationImage != null && curInfo.PersonInformationImage.Image != null) {
+                    //    curRow += '<img src="data:image;base64,' +
+                    //    curInfo.PersonInformationImage.Image +
+                    //    '" Height="80" Width="80" alt="Profile Picture" />';
+                    //}
+                    curRow += html;
+                    curRow += '</td></tr>';
                     myTable += curRow;
                 }
                 myTable += '</table>';
@@ -123,4 +137,5 @@
     </script>
     <link rel="stylesheet" href="../../Content/awesomplete.css"/>
     <script src="/Scripts/awesomplete.js" async></script>
+    <script src="/Scripts/mustache.js" async></script>
 }
