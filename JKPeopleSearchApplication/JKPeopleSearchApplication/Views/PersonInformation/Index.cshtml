@@ -15,32 +15,41 @@
         <h2>Person Search</h2>
     </div>
     <p>Type any part of the first or last name to search</p>
-    <input id="searchText" name="searchTextInput" type="text" value="" />
+    <span>
+        <input class="awesomplete"
+               oninput="myInput()"
+               id="searchText" 
+               type="text"
+               placeholder="Search..."
+                />
+    </span>
     <div id="allPeople" style="background-color:lightskyblue"></div>
 </div>
 
 @section Scripts {
     <script>
-
-
+        window.onload = populateSuggestions();
+        document.getElementById('searchText').addEventListener('awesomplete-selectcomplete', function () {
+            doneTyping();
+            document.getElementById('searchText').close();
+        });
         //Taken from:
         //http://stackoverflow.com/questions/4220126/run-javascript-function-when-user-finishes-typing-instead-of-on-key-up
         var typingTimer; //timer identifier
         var doneTypingInterval = 250; //time in ms
 
-        $('#searchText')
-            .keyup(function() {
-                clearTimeout(typingTimer);
-                typingTimer = setTimeout(doneTyping, doneTypingInterval);
-            });
-
+        
+        function myInput() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        }
         //user is "finished typing," do something
         function doneTyping() {
             var currentInput = $('#searchText').val();
             runSearch(currentInput);
-
-
         }
+
+        
 
         function runSearch(myInput) {
             $.ajax({
@@ -55,6 +64,21 @@
                     var resultObjects = JSON.parse(result);
                     updateDivWithInfo(resultObjects);
                     //$('#allPeople').html(resultObjects);
+                })
+                .error(function(xhr, status) {
+                    alert(status);
+                });
+        }
+
+        function populateSuggestions() {
+            $.ajax({
+                    url: "/PersonInformation/GetNameSuggestions",
+                    type: 'GET'
+                })
+                .success(function (result) {
+                    var input = document.getElementById("searchText");
+                    var awesomplete = new Awesomplete(input);
+                    awesomplete.list = result;
                 })
                 .error(function(xhr, status) {
                     alert(status);
@@ -84,7 +108,9 @@
                     curRow += '<td>' + curInfo.Age + '</td>';
                     curRow += '<td>' + curInfo.Address + '</td>';
                     curRow += '<td>' + curInfo.Interests + '</td>';
-                    curRow += '<td><img src="data:image;base64,' + curInfo.PersonInformationImage.Image + '" Height="80" Width="80" alt="IMAGES" /><td>';
+                    curRow += '<td><img src="data:image;base64,' +
+                        curInfo.PersonInformationImage.Image +
+                        '" Height="80" Width="80" alt="IMAGES" /><td>';
                     curRow += '<tr>';
                     myTable += curRow;
                 }
@@ -95,4 +121,6 @@
 
 
     </script>
+    <link rel="stylesheet" href="../../Content/awesomplete.css"/>
+    <script src="/Scripts/awesomplete.js" async></script>
 }

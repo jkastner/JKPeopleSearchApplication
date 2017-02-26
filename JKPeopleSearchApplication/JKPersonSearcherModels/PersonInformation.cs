@@ -23,5 +23,10 @@ namespace JKPersonSearcherModels
         public string Address { get; set; }
         public string Interests { get; set; }
         public virtual PersonImage PersonInformationImage { get; set; }
+
+        public String FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
+        }
     }
 }

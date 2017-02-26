@@ -26,7 +26,7 @@ namespace JKPeopleSearchApplication
 
             //If there are any perfect matches, we should just return those.
             var perfectMatches = searchTargets.Where(
-                x => (x.FirstName + " " + x.LastName).ToLower().Equals(fixedInput)).ToArray();
+                x => (x.FullName).ToLower().Equals(fixedInput)).ToArray();
             if (perfectMatches.Any())
             {
                 //It's possible that there could be so many perfect matches that the system could flood.

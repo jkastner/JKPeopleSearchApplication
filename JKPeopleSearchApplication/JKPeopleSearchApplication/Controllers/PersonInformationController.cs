@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -123,8 +124,8 @@ namespace JKPeopleSearchApplication.Controllers
             base.Dispose(disposing);
         }
 
-        
-        
+
+
 
         public ActionResult PersonSearchMatch()
         {
@@ -136,7 +137,7 @@ namespace JKPeopleSearchApplication.Controllers
             //Likewise, we don't want to flood a regular user with thousands of results 
             //(although I like that look as it shows all my pretty data, a real user won't care.
             string data = Request.Params["searchQuery"];
-            var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo);
+            var searchResult = PersonSearcher.SearchForMatch(data, _personInfoContext.AllPersonInfo.ToList());
             if (searchResult.SearchResults.Length > 15)
             {
                 //The user hasn't entered in enough information to narrow it, don't return anything.
@@ -149,6 +150,14 @@ namespace JKPeopleSearchApplication.Controllers
             return Json(searchResult.ToJsonString(), JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult GetNameSuggestions()
+        {
+            var curPeople = _personInfoContext.AllPersonInfo.ToList();
+            var allNames = curPeople.Select(x => x.FullName).ToArray();
+            Newtonsoft.Json.JsonConvert.SerializeObject(allNames);
+            return Json(allNames, JsonRequestBehavior.AllowGet);
+        }
 
         public async Task<ActionResult> InsertSeedData()
         {
