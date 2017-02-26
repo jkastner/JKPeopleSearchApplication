@@ -13,8 +13,11 @@ namespace JKPersonSearcherModels
     /// </summary>
     public class PersonInformation
     {
+        
+        [Required]
         [Display(Name="First Name")]
         public String FirstName { get; set; }
+        [Required]
         [Display(Name = "Last Name")]
         public String LastName { get; set; }
 

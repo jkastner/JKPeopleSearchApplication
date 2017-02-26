@@ -8,7 +8,7 @@ Scottie Derrickson		41	812 Chestnut Rd. Chelsea, MA 02150	Scuba Diving
 Ronny Tittensor		28	775 State St. Port Huron, MI 48060	Amateur Astronomy
 Wiley Snyder		36	8881 Pine Court Billerica, MA 01821	Rescuing Abused Or Abandoned Animals
 Kristina Wolfe		27	7225 High Ridge Lane Athens, GA 30605	People Watching
-Ava  Plank		23	535 Eagle Street Upper Marlboro, MD 20772	Floral Arrangements
+Ava Plank		23	535 Eagle Street Upper Marlboro, MD 20772	Floral Arrangements
 Rosanne Winfield		25	7 Thorne Ave. Union City, NJ 07087	R/C Helicopters
 Rodge Stenet		48	635 Wrangler St. Harrisburg, PA 17109	Model Rockets
 Linwood Hardy		29	7271 Paris Hill Drive Cranberry Twp, PA 16066	Home Theater
@@ -44,7 +44,7 @@ Selma Newport		34	433 East Courtland Lane Trussville, AL 35173	Horse riding
 Jeremy Blackman		25	51 Strawberry Street Pittsford, NY 14534	Frisbee Golf
 Barbra Teel		42	701 E. Country Club Road Mount Laurel, NJ 08054	Drawing
 Christian Ryley		64	14 Myrtle Dr. Fort Worth, TX 76110	Bonsai Tree
-Mona  Baker		32	59 Myers Street Elmont, NY 11003	Fishing
+Mona Baker		32	59 Myers Street Elmont, NY 11003	Fishing
 Travis Pierson		30	477 Ivy Drive Perkasie, PA 18944	Meditation
 Jarred Palmer		30	399 Ridge St. Lexington, NC 27292	Educational Courses
 Vonda Jeffery		38	909 Ivy St. Cumberland, RI 02864	Collecting RPM Records
@@ -55,13 +55,13 @@ Clement St John		27	7754 Orchard Road Rowlett, TX 75088	Relaxing
 Reba Christians		18	762 Blackburn St. Hernando, MS 38632	Video Games
 Lucinda Palmer		21	58 Bayberry Dr. Irwin, PA 15642	Snowboarding
 Gray Summers		49	94 Augusta Ave. Berwyn, IL 60402	R/C Boats
-Iona  Travers		23	8237 Creekside Ave. Whitestone, NY 11357	Macrame
+Iona Travers		23	8237 Creekside Ave. Whitestone, NY 11357	Macrame
 Megan Quincy		37	107 Pawnee Court Winston Salem, NC 27103	Digital Photography
 Curt Newell		56	437 Rock Creek Ave. Evanston, IL 60201	Chess
 Tristan Janson		59	41B Golf St. Mansfield, MA 02048	Collecting Swords
-Nina  Stroud		22	7 Cypress Ave. Cuyahoga Falls, OH 44221	Train Collecting
+Nina Stroud		22	7 Cypress Ave. Cuyahoga Falls, OH 44221	Train Collecting
 Garland Mondy		28	486 Oxford Dr. Merrick, NY 11566	Learning An Instrument
-Maura  Thomas		48	78 East Lyme Lane Huntington, NY 11743	World Record Breaking
+Maura Thomas		48	78 East Lyme Lane Huntington, NY 11743	World Record Breaking
 Ernie Dannel		68	771 Courtland Drive New Milford, CT 06776	Drawing
 Lettie Harper		28	98 S. Tailwater Road Mount Holly, NJ 08060	Urban Exploration
 Samuel Outterridge		19	9612 Greystone Dr. Fairborn, OH 45324	Football
@@ -86,7 +86,7 @@ Elias Dickinson		31	759 Windfall Ave. Palm Bay, FL 32907	Beadwork
 Reed Wilson		45	701 E. Country Club Road Mount Laurel, NJ 08054	Belly Dancing
 Zula Kellogg		18	560 Race St. Amarillo, TX 79106	Meditation
 Albert Kemp		19	556 Brickell Court Crawfordsville, IN 47933	Church/church activities
-Gale  Spence		44	523 W. Manor Station Lane Stratford, CT 06614	Listening to music
+Gale Spence		44	523 W. Manor Station Lane Stratford, CT 06614	Listening to music
 Harris Fisher		45	763 Laurel Street Stevens Point, WI 54481	Rescuing Abused Or Abandoned Animals
 Aurora Jackson		50	510 W. Shub Farm Rd. Tewksbury, MA 01876	Self Defense
 Steve Fay		34	9612 Greystone Dr. Fairborn, OH 45324	Photography
@@ -108,7 +108,7 @@ Jade Jacobs		32	807 West Squaw Creek St. Parsippany, NJ 07054	Reading To The Eld
 Wilmer Davison		18	88 Peg Shop Ave. Clover, SC 29710	Nail Art
 Maynard Stacks		40	9532 Oakwood Street Bakersfield, CA 93306	Church/church activities
 Daisy Statham		34	561 Saxon Ave. New Orleans, LA 70115	Locksport
-Goldie  Snider		27	457 Rockland St. Muskogee, OK 74403	Amateur Radio
+Goldie Snider		27	457 Rockland St. Muskogee, OK 74403	Amateur Radio
 Irvin Speight		35	71 East Nicolls Street Helena, MT 59601	Textiles
 Durward Polley		20	510 W. Shub Farm Rd. Tewksbury, MA 01876	Model Railroading
 Thomasina Watkins		18	9523 South Sleepy Hollow Dr. Romeoville, IL 60446	Working on cars
@@ -132,7 +132,7 @@ Luke Hancock		49	559 Lake Forest Road Patchogue, NY 11772	Astrology
 Sybil Attaway		38	896 N. Bear Hill Court Patchogue, NY 11772	Working on cars
 Enola Coke		60	632 Taylor St. Lake In The Hills, IL 60156	Knotting
 Rudolph Church		27	15 El Dorado St. Greenwood, SC 29646	Weather Watcher
-Ellis  Odell		23	7935 Airport St. Jacksonville Beach, FL 32250	Cartooning
+Ellis Odell		23	7935 Airport St. Jacksonville Beach, FL 32250	Cartooning
 Elvin Stroud		52	7204 Talbot Drive New Brunswick, NJ 08901	Working In A Food Pantry
 Lynwood Ash		29	427 Richardson Street Iowa City, IA 52240	Violin
 Lela Marchand		38	441 Essex St. Selden, NY 11784	Crossword Puzzles
@@ -163,7 +163,7 @@ Jeanna Kevins		55	309 Indian Spring Drive Clifton Park, NY 12065	Ultimate Frisbe
 Bettye Danell		41	8475 Devonshire Street Enterprise, AL 36330	People Watching
 Jordon Newport		30	237 Birchwood St. Hopkins, MN 55343	Pinochle
 Sibyl Dennel		53	517 NW. Randall Mill Ave. Meadville, PA 16335	Church/church activities
-Valentine  Cox		32	80 Glendale St. Council Bluffs, IA 51501	Bicycle Polo
+Valentine Cox		32	80 Glendale St. Council Bluffs, IA 51501	Bicycle Polo
 Tad Skinner		50	597 Schoolhouse St. Wheaton, IL 60187	Cake Decorating
 Marshall Bonney		55	7342 Myers St. Cocoa, FL 32927	Scuba Diving
 Donna Atteberry		20	8758 Oxford Drive Boca Raton, FL 33428	Digital Photography
@@ -177,7 +177,7 @@ Rickey Jephson		65	9924 Shady St. Fresh Meadows, NY 11365	Hot air ballooning
 Cammie Thompsett		43	82 Water Ave. Wethersfield, CT 06109	Pyrotechnics
 Irma Haight		28	7525 Courtland Street Acworth, GA 30101	Football
 Bertram Nixon		47	875 Sunset Street Irmo, SC 29063	Self Defense
-Simone  Edwardson		26	22 Kirkland Rd. Santa Clara, CA 95050	Aircraft Spotting
+Simone Edwardson		26	22 Kirkland Rd. Santa Clara, CA 95050	Aircraft Spotting
 Marvin Snyder		34	876 Victoria Ave. Fort Washington, MD 20744	Embroidery
 Luana Queen		34	7271 Paris Hill Drive Cranberry Twp, PA 16066	Collecting Swords
 Trisha Cotterill		60	443 Riverside Ave. Derry, NH 03038	Educational Courses
@@ -188,7 +188,7 @@ Lambert Fairburn		28	568 Meadowbrook Dr. Brooklyn, NY 11201	Skateboarding
 Beau Benbow		43	9556 S. Hilltop St. Lake Mary, FL 32746	Astrology
 Jimmy Porcher		34	8017 NW. Victoria Ave. Lilburn, GA 30047	Bicycle Polo
 Bernard Rennoll		46	5 East Manchester Drive Leominster, MA 01453	Working on cars
-Gus  Atterberry		58	7881 Fairview Ave. Enterprise, AL 36330	Reading
+Gus Atterberry		58	7881 Fairview Ave. Enterprise, AL 36330	Reading
 Clifton Blackman		24	4 Summerhouse Ave. Lake Zurich, IL 60047	Swimming
 Constance Sherburne		68	288 Glen Ridge Dr. Shelbyville, TN 37160	Magic
 Sheree Merrickson		47	597 Schoolhouse St. Wheaton, IL 60187	Slack Lining
@@ -219,12 +219,12 @@ Russel Hall		36	9805 Carpenter Drive Kalamazoo, MI 49009	Inventing
 Montgomery Morris		63	7935 Airport St. Jacksonville Beach, FL 32250	Chess
 Webster Johnson		19	9765 Ridgeview Dr. Rochester, NY 14606	Ceramics
 Arn Sniders		26	98 S. Tailwater Road Mount Holly, NJ 08060	Pottery
-Sampson  Badcoke		22	82 Bridle Road Sacramento, CA 95820	Metal Detecting
+Sampson Badcoke		22	82 Bridle Road Sacramento, CA 95820	Metal Detecting
 Harding Yoxall		40	63 S. Woodside Ave. Circle Pines, MN 55014	Candle Making
 Faron Ainsworth		44	7370 Rockcrest Drive Old Bridge, NJ 08857	Bonsai Tree
 Rena Derricks		30	61 SE. Queen Dr. Upland, CA 91784	Taxidermy
 Nichole Steed		69	288 Glen Ridge Dr. Shelbyville, TN 37160	Sky Diving
-Merry  House		37	423 Birchpond Dr. Braintree, MA 02184	Painting
+Merry House		37	423 Birchpond Dr. Braintree, MA 02184	Painting
 Marci Mason		39	9330 Hill Field Street Hagerstown, MD 21740	Train Collecting
 Fred Sergeant		64	77 Brookside Drive Glen Cove, NY 11542	Sleeping
 Cornelia Neville		55	510 W. Shub Farm Rd. Tewksbury, MA 01876	Mountain Climbing
@@ -260,10 +260,10 @@ Jenifer Ecclestone		26	353 1st St. Seattle, WA 98144	Collecting Artwork
 Sherri Harden		48	237 Birchwood St. Hopkins, MN 55343	Kite Boarding
 Ford Carlyle		66	569 Division St. Hixson, TN 37343	Working In A Food Pantry
 Zak Bartram		21	8237 Creekside Ave. Whitestone, NY 11357	Illusion
-Joni  Parsons		29	16 Lyme Avenue Delray Beach, FL 33445	Kite Boarding
+Joni Parsons		29	16 Lyme Avenue Delray Beach, FL 33445	Kite Boarding
 Jerrod Johnson		23	7966 West Ketch Harbour St. Kingston, NY 12401	Beatboxing
 Chasity Blythe		25	31 Water Street Montclair, NJ 07042	Self Defense
-Nita  Breckenridge		21	4 East Tailwater Lane Addison, IL 60101	Becoming A Child Advocate
+Nita Breckenridge		21	4 East Tailwater Lane Addison, IL 60101	Becoming A Child Advocate
 Dolph Hudnall		42	517 NW. Randall Mill Ave. Meadville, PA 16335	Dominoes
 Willis Spears		31	411 New Dr. Rosemount, MN 55068	YoYo
 Trace Traver		26	909 Ivy St. Cumberland, RI 02864	Bringing Food To The Disabled
@@ -274,14 +274,14 @@ Idella Stroud		65	64 Bellevue Ave. Port Richey, FL 34668	Learning An Instrument
 Elvin Samuel		21	413 Columbia Dr. Clinton Township, MI 48035	Sand Castles
 Dwight Henryson		20	7764 Beacon Rd. Minot, ND 58701	Magic
 Janey Crouch		40	7525 Courtland Street Acworth, GA 30101	Taxidermy
-Alf  Underhill		22	88 Monroe Court Casselberry, FL 32707	Treasure Hunting
+Alf Underhill		22	88 Monroe Court Casselberry, FL 32707	Treasure Hunting
 Keely Styles		61	82 Bridle Road Sacramento, CA 95820	Photography
 Zachary Whinery		36	70 Military St. Chester, PA 19013	Macrame
 Lucky Hart		64	478 S. Lakewood Road Manitowoc, WI 54220	Surf Fishing
 Scarlett Womack		34	3 Foster Street East Elmhurst, NY 11369	World Record Breaking
 Amelia Boon		57	7 Windfall Lane Royal Oak, MI 48067	Storm Chasing
 Percy Berry		54	8481 Morris Dr. Hilliard, OH 43026	Racing Pigeons
-Frank  Bunker		34	7593 Berkshire St. Yakima, WA 98908	Meditation
+Frank Bunker		34	7593 Berkshire St. Yakima, WA 98908	Meditation
 Nigel Knaggs		35	7111 Sunnyslope Ave. Bowling Green, KY 42101	Skeet Shooting
 Elijah Michaelson		28	117 Manchester St. Wakefield, MA 01880	Bicycle Polo
 Lana Bennet		20	8715 Livingston Lane Hightstown, NJ 08520	Rapping
@@ -299,9 +299,9 @@ Stella Wallis		44	9243 Brookside Drive Downers Grove, IL 60515	Working In A Food
 Cal Warren		44	22 Olive Court Merrick, NY 11566	Racing Pigeons
 Katie Ford		41	404 Belmont Street Glen Burnie, MD 21060	Beatboxing
 Clotilda Scrivener		54	44 South Beacon St. Garner, NC 27529	Horse riding
-Kay  White		41	771 Courtland Drive New Milford, CT 06776	Keep A Journal
-Marnie  Tobias		44	7935 Airport St. Jacksonville Beach, FL 32250	Kitchen Chemistry
-Ella  Traiylor		58	89 Van Dyke Drive Lansdale, PA 19446	Motorcycles
+Kay White		41	771 Courtland Drive New Milford, CT 06776	Keep A Journal
+Marnie Tobias		44	7935 Airport St. Jacksonville Beach, FL 32250	Kitchen Chemistry
+Ella Traiylor		58	89 Van Dyke Drive Lansdale, PA 19446	Motorcycles
 Racquel Stack		17	24 Broad St. West Fargo, ND 58078	Reading
 Corrine Bates		43	7241 W. Foster Road Bensalem, PA 19020	Musical Instruments
 Ross Washington		21	8701 Fordham Drive Randallstown, MD 21133	Four Wheeling
@@ -316,7 +316,7 @@ Lambert Badcoke		34	7572 Race Street Birmingham, AL 35209	Quilting
 Cole Reeve		45	542 East Bridle Street Sanford, NC 27330	Exercise (aerobics, weights)
 Lola Rayne		41	94 Wayne St. Cedar Falls, IA 50613	Kayaking
 Bennie Donaldson		23	635 Wrangler St. Harrisburg, PA 17109	String Figures
-Maya  Mounce		33	36 53rd St. Germantown, MD 20874	Bringing Food To The Disabled
+Maya Mounce		33	36 53rd St. Germantown, MD 20874	Bringing Food To The Disabled
 Yancy Hill		55	13 Theatre St. Strongsville, OH 44136	Ultimate Frisbee
 Elwood Badcock		35	8571 Miles Road Lake Mary, FL 32746	Tennis
 Rosalyn Eaton		17	15 El Dorado St. Greenwood, SC 29646	Scrapbooking
@@ -368,7 +368,7 @@ Harry Sampson		21	8394 Buckingham Street Conway, SC 29526	Computer activities
 Frederick Butler		34	323 Ketch Harbour St. Moses Lake, WA 98837	Scuba Diving
 Bennett Stacks		50	9532 Oakwood Street Bakersfield, CA 93306	Painting
 Florrie School		29	7 Windfall Lane Royal Oak, MI 48067	Soccer
-Jon  Seymour		37	596 Courtland Rd. Nutley, NJ 07110	Kites
+Jon Seymour		37	596 Courtland Rd. Nutley, NJ 07110	Kites
 Jamey Jarvis		45	8527 4th St. Fargo, ND 58102	Tool Collecting
 Corrie Strudwick		54	7546 Prince Street Louisville, KY 40207	Internet
 Lizzie Shelby		43	696 Cardinal Rd. Coventry, RI 02816	Games
@@ -380,7 +380,7 @@ Gwenda Elliston		27	789 Cherry Dr. Dorchester, MA 02125	Horse riding
 Quinton Garrard		46	7 Thorne Ave. Union City, NJ 07087	Knotting
 Woodrow Albinson		36	559 Lake Forest Road Patchogue, NY 11772	Candle Making
 Kara Faulkner		18	457 Rockland St. Muskogee, OK 74403	Sky Diving
-Augustine  Earls		21	78 Yukon Drive Erlanger, KY 41018	Calligraphy
+Augustine Earls		21	78 Yukon Drive Erlanger, KY 41018	Calligraphy
 Thomas Upton		22	37 Academy Dr. Teaneck, NJ 07666	Writing
 Calla Overton		44	863 Longbranch Rd. Oak Lawn, IL 60453	Meditation
 Sonia Deering		25	761 Hilltop Dr. Egg Harbor Township, NJ 08234	Ultimate Frisbee
@@ -457,7 +457,7 @@ Emil Keen		28	59 William Court Barrington, IL 60010	Spending time with family/ki
 Quinton Stevens		60	64 Park St. Hyde Park, MA 02136	Base Jumping
 Georgene Loman		37	37 Park Street Easton, PA 18042	Educational Courses
 Alison Chancellor		41	15 El Dorado St. Greenwood, SC 29646	Motorcycles
-Colin  Watson		54	8418 Hudson St. Beverly, MA 01915	Wingsuit Flying
+Colin Watson		54	8418 Hudson St. Beverly, MA 01915	Wingsuit Flying
 Lucky Steed		18	11 Wakehurst Drive Rocklin, CA 95677	Surfing
 Layne Day		25	222 Roosevelt Street Saint Johns, FL 32259	Leathercrafting
 Angelina Pond		30	76 North Pin Oak St. Danville, VA 24540	Cake Decorating
@@ -469,7 +469,7 @@ Ginnie Tucker		23	83 East Brookside Dr. Garden City, NY 11530	Frisbee Golf
 Stephen Suggitt		30	30 Queen Court Pueblo, CO 81001	Kite Boarding
 Wilmer Kidd		20	729 Elm St. North Royalton, OH 44133	Parachuting
 Emory Tash		18	615 Forest Street Harrisburg, PA 17109	Playing music
-Moe  Christianson		24	8748 Hillside Rd. North Miami Beach, FL 33160	Shopping
+Moe Christianson		24	8748 Hillside Rd. North Miami Beach, FL 33160	Shopping
 Roly Jones		29	8141 West Amerige Street Catonsville, MD 21228	Saltwater Aquariums
 Ramsey Christinson		46	661 W. Boston Drive Lombard, IL 60148	Cooking
 Anthony Burnham		36	66 University Ave. Perth Amboy, NJ 08861	R/C Boats
@@ -497,5 +497,5 @@ Cari Dickenson		43	690 East Street Feasterville Trevose, PA 19053	Bicycling
 Marty Martel		43	580 University Ave. Bonita Springs, FL 34135	Bell Ringing
 Regina Potter		61	7055 Lake Forest Ave. Augusta, GA 30906	Scuba Diving
 Prissy Shelby		34	9710 Woodside St. Hope Mills, NC 28348	Kayaking
-Joan  Ryers		52	9781 Thomas Road Bedford, OH 44146	Papermache
+Joan Ryers		52	9781 Thomas Road Bedford, OH 44146	Papermache
 Harlan Bullard		49	9477 Kent Drive South Bend, IN 46614	Jump Roping
